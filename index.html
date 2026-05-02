@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>nothing serious</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: #080808;
+  color: #bdbdbd;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(110, 140, 255, 0.12), transparent 35%),
+    radial-gradient(circle at 80% 15%, rgba(255, 120, 180, 0.10), transparent 35%),
+    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.04), transparent 40%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+main {
+  width: min(980px, 92%);
+  margin: auto;
+}
+
+section {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 70px 0;
+}
+
+.fake-tag {
+  display: inline-block;
+  width: fit-content;
+  padding: 7px 12px;
+  border: 1px solid #222;
+  border-radius: 999px;
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: clamp(42px, 8vw, 88px);
+  color: #f5f5f5;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
+}
+
+h2 {
+  color: #eeeeee;
+  font-size: clamp(26px, 5vw, 42px);
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 700px;
+}
+
+.low-card {
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 22px;
+  padding: 26px;
+  margin-top: 18px;
+}
+
+.song-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.fake-song {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+.fake-chat {
+  display: grid;
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.bubble {
+  max-width: 70%;
+  padding: 13px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.bubble.me {
+  margin-left: auto;
+  color: #8f8f8f;
+}
+
+.end {
+  min-height: 100vh;
+  position: relative;
+  color: #555;
+}
+
+.hidden-trigger {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+  opacity: 0.28;
+  transition: 0.25s ease;
+}
+
+.hidden-trigger:hover {
+  opacity: 1;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.tiny {
+  font-size: 13px;
+  color: #555;
+  margin-top: 26px;
+}
+
+@media(max-width: 600px) {
+  section {
+    min-height: 85vh;
+    padding: 55px 0;
+  }
+
+  .bubble {
+    max-width: 86%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+  <section>
+    <span class="fake-tag">made with questionable effort</span>
+    <h1>idk why i made this</h1>
+    <p>
+      yeah so like i guess i love you or something.
+      not a big deal tho.  
+      definitely not a whole thing.
+      very normal. very casual. very whatever.
+    </p>
+  </section>
+
+  <section>
+    <h2>confession or whatever</h2>
+    <div class="low-card">
+      <p>
+        i could write something dramatic here but that sounds like effort,
+        so just pretend i said something really deep and meaningful.
+        anyway yeah. you matter. unfortunately.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>songs i guess</h2>
+
+    <div class="song-list">
+      <div class="fake-song">APT - Bruno Mars</div>
+      <div class="fake-song">Catch Catch - Yena</div>
+    </div>
+
+    <p class="tiny">
+      you don’t need songs, you have my playlist already.
+    </p>
+  </section>
+
+  <section>
+    <h2>actual conversation quality</h2>
+
+    <div class="fake-chat">
+      <div class="bubble me">“ok”</div>
+      <div class="bubble">“cool”</div>
+      <div class="bubble me">“whatever”</div>
+      <div class="bubble">“so romantic wow”</div>
+      <div class="bubble me">“i know right”</div>
+    </div>
+  </section>
+
+  <section class="end">
+    <h2>that’s it</h2>
+    <p>
+      nothing else here.  
+      no hidden thing.  
+      no secret.  
+      don’t inspect anything.
+    </p>
+  </section>
+
+</main>
+
+<div class="hidden-trigger" onclick="window.location.href='gate.html'">
+  wait...
+</div>
+
+</body>
+</html>

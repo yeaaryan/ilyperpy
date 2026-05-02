@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Us</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #343442;
+      background: linear-gradient(135deg, #dff3ff, #ffe3f1, #eef0ff);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 8% 18%, rgba(105, 180, 255, 0.50), transparent 32%),
+        radial-gradient(circle at 90% 20%, rgba(255, 130, 190, 0.46), transparent 34%),
+        radial-gradient(circle at 50% 100%, rgba(180, 160, 255, 0.34), transparent 36%);
+      z-index: -4;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.24) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.20) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
+      pointer-events: none;
+      z-index: -3;
+      opacity: .35;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: fixed;
+      width: 310px;
+      height: 310px;
+      border-radius: 50%;
+      filter: blur(46px);
+      opacity: 0.46;
+      z-index: -1;
+      animation: floatBlob 8s ease-in-out infinite alternate;
+    }
+
+    .blob.blue {
+      background: #8ed2ff;
+      top: 80px;
+      left: -100px;
+    }
+
+    .blob.pink {
+      background: #ff9dcc;
+      right: -100px;
+      bottom: 90px;
+      animation-delay: 1.4s;
+    }
+
+    .blob.purple {
+      background: #c8b6ff;
+      left: 45%;
+      bottom: -140px;
+      animation-delay: 2.4s;
+    }
+
+    @keyframes floatBlob {
+      to {
+        transform: translate(45px, -45px) scale(1.12);
+      }
+    }
+    /* FLOATING WORDS + DOODLES */
+.soft-doodles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.soft-doodle {
+  position: absolute;
+  user-select: none;
+  opacity: var(--opacity);
+  transform: rotate(var(--rotate));
+  animation:
+    doodleFloat var(--duration) ease-in-out infinite alternate,
+    doodleFade 7s ease-in-out infinite;
+}
+
+.soft-doodle.word {
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  color: rgba(80, 84, 112, 0.72);
+  font-size: var(--font-size);
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  box-shadow: 0 12px 30px rgba(120, 110, 170, 0.08);
+}
+
+.soft-doodle.icon {
+  font-size: var(--font-size);
+  filter: drop-shadow(0 10px 18px rgba(120, 110, 170, 0.12));
+}
+
+@keyframes doodleFloat {
+  0% {
+    transform: translateY(0) translateX(0) rotate(var(--rotate)) scale(1);
+  }
+
+  100% {
+    transform: translateY(-28px) translateX(14px) rotate(calc(var(--rotate) + 8deg)) scale(1.04);
+  }
+}
+
+@keyframes doodleFade {
+  0%, 100% {
+    opacity: calc(var(--opacity) * 0.65);
+  }
+
+  50% {
+    opacity: var(--opacity);
+  }
+}
+
+/* keep main content above doodles */
+section,
+footer,
+.top-nav,
+.global-music-player {
+  position: relative;
+  z-index: 2;
+}
+
+    /* FLOATING NAV */
+    .top-nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99998;
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(255,255,255,.85);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 50px rgba(130,120,180,.16);
+    }
+
+    .top-nav a {
+      text-decoration: none;
+      color: #5d5d75;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 10px 13px;
+      border-radius: 999px;
+      transition: .25s ease;
+    }
+
+    .top-nav a:hover {
+      background: #fff;
+      color: #ff5fac;
+      transform: translateY(-2px);
+    }
+
+    /* GLOBAL LAYOUT */
+    section {
+      min-height: 100vh;
+      padding: 100px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: min(780px, 80%);
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.88), transparent);
+      opacity: .7;
+    }
+
+    .container {
+      width: min(1080px, 100%);
+      margin: auto;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(255,255,255,0.88);
+      border-radius: 38px;
+      padding: clamp(24px, 5vw, 48px);
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 25px 80px rgba(100, 130, 180, 0.18),
+        inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.65);
+      color: #7d7890;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      box-shadow: 0 12px 26px rgba(120,120,170,.10);
+    }
+
+    h1 {
+      font-size: clamp(78px, 18vw, 165px);
+      line-height: 0.9;
+      letter-spacing: -8px;
+      background: linear-gradient(90deg, #5aaeff, #ff70b8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      font-size: clamp(38px, 8vw, 72px);
+      line-height: .98;
+      letter-spacing: -3.5px;
+      color: #ff63ae;
+      margin-bottom: 22px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.75;
+      color: #55576a;
+      white-space: pre-line;
+    }
+
+    .hero-line {
+      max-width: 760px;
+      margin: 0 auto 34px;
+      font-size: clamp(18px, 3.2vw, 24px);
+    }
+
+    .soft-note {
+      max-width: 760px;
+      margin: 18px auto 0;
+      padding: 18px 20px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.54);
+      border: 1px solid rgba(255,255,255,.8);
+      color: #6d6b82;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 22px;
+      background: white;
+      color: #465070;
+      font-weight: 950;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 14px 35px rgba(100, 130, 180, 0.20);
+      transition: 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      background: #ffe4f2;
+    }
+
+    .btn:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: 0.85s ease;
+    }
+
+    .fade.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ONE REAL MUSIC PLAYER */
+    .global-music-player {
+      position: fixed;
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px) scale(.98);
+      transition:
+        top .28s ease,
+        left .28s ease,
+        right .28s ease,
+        width .28s ease,
+        opacity .22s ease,
+        transform .28s ease;
+    }
+
+    .global-music-player.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .global-music-player.mini .song-player-card {
+      padding: 12px;
+      border-radius: 26px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.9);
+      box-shadow: 0 22px 70px rgba(120, 110, 170, 0.30);
+      backdrop-filter: blur(14px);
+    }
+
+    .global-music-player.mini .youtube-frame {
+      border-radius: 18px;
+    }
+
+    .global-music-player.mini .now-playing {
+      margin-top: 10px;
+      padding: 10px 12px;
+      font-size: 12px;
+      border-radius: 16px;
+    }
+
+    /* HERO / PHOTO SECTION */
+    .hero-card {
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: "blue + pink = whatever this is";
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      color: #77758c;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 42px;
+    }
+
+    .photo-card {
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      background: linear-gradient(135deg, #d9f1ff, #ffe0ef);
+      border: 1px solid rgba(255,255,255,.92);
+      box-shadow: 0 22px 55px rgba(100,130,180,.17);
+      transform: rotate(var(--rotate));
+      transition: .32s ease;
+    }
+
+    .photo-card:hover {
+      transform: rotate(0deg) translateY(-10px) scale(1.02);
+      box-shadow: 0 32px 80px rgba(120,100,180,.22);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 330px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-card.empty::before {
+      content: "add fictional couple/friend photo here";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      text-align: center;
+      color: #777;
+      font-weight: 900;
+    }
+
+    .photo-caption {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      padding: 13px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.76);
+      backdrop-filter: blur(10px);
+      color: #3d3d4f;
+      font-weight: 950;
+      text-align: center;
+    }
+
+    /* HINTS */
+    .hint-list {
+      display: grid;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .hint-card {
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 26px;
+      padding: 21px;
+      text-align: left;
+      box-shadow: 0 14px 35px rgba(100,130,180,.11);
+      transition: .25s ease;
+    }
+
+    .hint-card:hover {
+      transform: translateY(-6px);
+      background: #fff2f8;
+    }
+
+    .suspicious {
+      margin-top: 34px;
+      padding: 26px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(223,243,255,.85), rgba(255,226,241,.92));
+      border: 1px solid white;
+      font-size: clamp(24px, 5vw, 44px);
+      font-weight: 1000;
+      color: #ff5fac;
+      line-height: 1.15;
+    }
+
+    /* MOLES */
+    .moles {
+      text-align: center;
+    }
+
+    .moles .big {
+      font-size: clamp(26px, 6vw, 54px);
+      font-weight: 1000;
+      line-height: 1.25;
+      color: #5aaeff;
+    }
+
+    /* CHAT */
+    .chat-phone {
+      margin: 34px auto 0;
+      max-width: 590px;
+      min-height: 460px;
+      padding: 18px;
+      border-radius: 38px;
+      background: rgba(255,255,255,.58);
+      border: 1px solid white;
+      box-shadow: 0 30px 76px rgba(100,130,180,.18);
+    }
+
+    .chat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 10px 18px;
+      border-bottom: 1px solid rgba(120,130,160,.12);
+      margin-bottom: 18px;
+    }
+
+    .chat-name {
+      font-weight: 1000;
+      color: #3d3d4d;
+    }
+
+    .chat-status {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .chat-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 270px;
+      transition: .25s ease;
+    }
+
+    .chat-box.fade-out {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .msg {
+      max-width: 78%;
+      padding: 13px 15px;
+      border-radius: 20px;
+      font-size: 15px;
+      line-height: 1.5;
+      box-shadow: 0 12px 26px rgba(100,130,180,.10);
+    }
+
+    .msg.me {
+      margin-left: auto;
+      background: #dff2ff;
+      border-bottom-right-radius: 7px;
+    }
+
+    .msg.her {
+      background: #ffe1ef;
+      border-bottom-left-radius: 7px;
+    }
+
+    .typing {
+      display: none;
+      width: fit-content;
+      padding: 13px 16px;
+      border-radius: 20px;
+      background: #ffe1ef;
+    }
+
+    .typing.show {
+      display: block;
+    }
+
+    .dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff7fbe;
+      animation: bounce 0.9s infinite alternate;
+    }
+
+    .dots span:nth-child(2) {
+      animation-delay: .15s;
+    }
+
+    .dots span:nth-child(3) {
+      animation-delay: .3s;
+    }
+
+    @keyframes bounce {
+      to {
+        transform: translateY(-5px);
+        opacity: .45;
+      }
+    }
+
+    .chat-actions {
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    /* ENERGY */
+    .chaos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .chaos-card {
+      padding: 22px;
+      min-height: 125px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.70);
+      border: 1px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 900;
+      transition: .25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chaos-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle, rgba(255,112,184,.16), transparent 50%);
+      opacity: 0;
+      transition: .25s ease;
+    }
+
+    .chaos-card:hover {
+      transform: translateY(-7px) rotate(-1deg);
+      background: #fff1f8;
+    }
+
+    .chaos-card:hover::before {
+      opacity: 1;
+    }
+
+    /* LIKES */
+    .likes-grid {
+      display: grid;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .like-note {
+      text-align: left;
+      padding: 18px 20px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.74);
+      border-left: 6px solid #ff7fbe;
+      box-shadow: 0 14px 35px rgba(100,130,180,.10);
+      transition: .24s ease;
+    }
+
+    .like-note:hover {
+      transform: translateX(8px);
+      background: rgba(255,255,255,.92);
+    }
+
+    /* SONGS */
+    .song-player-slot {
+      margin-top: 30px;
+      min-height: 640px;
+    }
+
+    .song-player-card {
+      background: rgba(255,255,255,.60);
+      border: 1px solid rgba(255,255,255,.85);
+      border-radius: 38px;
+      padding: 18px;
+      box-shadow: 0 18px 45px rgba(160, 150, 190, 0.14);
+      backdrop-filter: blur(12px);
+      transition: 0.35s ease;
+    }
+
+    .youtube-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      border-radius: 30px;
+      display: block;
+      background: #fff7fb;
+    }
+
+    .now-playing {
+      margin-top: 16px;
+      padding: 15px 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.72);
+      color: #5b5873;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);
+    }
+
+    .song-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .song-card {
+      padding: 18px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(255,255,255,.88);
+      box-shadow: 0 12px 30px rgba(170, 150, 200, 0.10);
+      text-align: left;
+      transition: .25s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .song-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 245, 250, 0.88);
+    }
+
+    .song-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #3c3c4f;
+    }
+
+    .song-card small {
+      color: #76768b;
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .song-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .song-actions .btn {
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .song-link {
+      display: inline-flex;
+      align-items: center;
+      color: #ff5fac;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    /* MISS ME BUTTON */
+    .signal-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signal-orb {
+      width: 92px;
+      height: 92px;
+      margin: 8px auto 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #91d7ff, #ff8bc8);
+      box-shadow:
+        0 0 0 12px rgba(255,255,255,.42),
+        0 0 60px rgba(255,105,180,.32);
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+      animation: pulseSignal 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulseSignal {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow:
+          0 0 0 10px rgba(255,255,255,.42),
+          0 0 45px rgba(255,105,180,.26);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow:
+          0 0 0 18px rgba(255,255,255,.20),
+          0 0 70px rgba(90,174,255,.34);
+      }
+    }
+
+    .miss-btn {
+      margin-top: 24px;
+      background: linear-gradient(90deg, #dff2ff, #ffe1ef);
+    }
+
+    #missMeStatus {
+      min-height: 26px;
+    }
+
+    /* OVERTHINKING MINI LETTER */
+    .overthink-card {
+      display: grid;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .overthink-hidden {
+      display: none;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 26px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.76);
+      border: 1px solid white;
+      box-shadow: 0 18px 50px rgba(130,120,180,.14);
+      font-family: "Segoe Print", "Comic Sans MS", cursive;
+      color: #4b4250;
+      text-align: left;
+      line-height: 1.9;
+      animation: letterPop .36s ease;
+      white-space: pre-line;
+    }
+
+    .overthink-hidden.show {
+      display: block;
+    }
+
+    /* LETTER */
+    .envelope-wrap {
+      margin-top: 30px;
+      display: grid;
+      place-items: center;
+    }
+
+    .envelope {
+      width: min(650px, 100%);
+      min-height: 330px;
+      position: relative;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #ffd7eb, #dff3ff);
+      border: 2px solid white;
+      box-shadow: 0 25px 70px rgba(100,130,180,.20);
+      overflow: hidden;
+      cursor: pointer;
+      transition: .7s ease;
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(150deg, transparent 49%, rgba(255,255,255,.58) 50%),
+        linear-gradient(210deg, transparent 49%, rgba(255,255,255,.48) 50%);
+      transition: .7s ease;
+    }
+
+    .envelope::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 58%;
+      background: linear-gradient(160deg, rgba(255,255,255,.62), rgba(255,224,239,.34));
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transition: .7s ease;
+      transform-origin: top;
+    }
+
+    .envelope-label {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 1000;
+      color: #ff5fac;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .letter {
+      opacity: 0;
+      transform: translateY(54px) scale(.96);
+      margin: 24px;
+      padding: 30px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.94);
+      font-family: "Segoe Print", "Comic Sans MS", cursive;
+      color: #4b4250;
+      line-height: 1.9;
+      text-align: left;
+      white-space: pre-line;
+      transition: .75s ease;
+      position: relative;
+      z-index: 3;
+      box-shadow: 0 20px 50px rgba(120,110,170,.12);
+    }
+
+    .envelope.open {
+      min-height: 760px;
+    }
+
+    .envelope.open::before,
+    .envelope.open::after,
+    .envelope.open .envelope-label {
+      opacity: 0;
+      transform: translateY(-60px) rotateX(50deg);
+    }
+
+    .envelope.open .letter {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    @keyframes letterPop {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* FINAL SECRET */
+    .final-secret {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 24px;
+      background: #ffe1ef;
+      border: 1px solid white;
+      color: #4a4350;
+    }
+
+    .final-secret.show {
+      display: block;
+      animation: pop .35s ease;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 18px 90px;
+      color: #777;
+    }
+
+    .floating-note {
+      position: fixed;
+      pointer-events: none;
+      font-size: 24px;
+      z-index: 999;
+      animation: rise 1.4s ease forwards;
+    }
+
+    @keyframes rise {
+      to {
+        transform: translateY(-80px);
+        opacity: 0;
+      }
+    }
+
+    /* MOBILE */
+    @media(max-width: 800px) {
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width: 650px) {
+      section {
+        padding: 84px 16px;
+      }
+
+      .top-nav {
+        top: auto;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        transform: none;
+        justify-content: space-between;
+        overflow-x: auto;
+        border-radius: 22px;
+      }
+
+      .top-nav a {
+        white-space: nowrap;
+        font-size: 12px;
+        padding: 9px 11px;
+      }
+
+      h1 {
+        letter-spacing: -5px;
+      }
+
+      h2 {
+        letter-spacing: -2px;
+      }
+
+      .hero-card::after {
+        position: static;
+        display: inline-flex;
+        margin-top: 18px;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-card {
+        transform: none;
+      }
+
+      .msg {
+        max-width: 88%;
+      }
+
+      .chat-phone {
+        border-radius: 30px;
+      }
+
+      .envelope.open {
+        min-height: 920px;
+      }
+
+      .song-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .song-player-slot {
+        min-height: 420px;
+      }
+
+      .global-music-player.mini {
+        top: 12px !important;
+        left: 12px !important;
+        right: 12px !important;
+        width: auto !important;
+      }
+
+      .global-music-player.mini .now-playing {
+        font-size: 11px;
+      }
+
+      footer {
+        padding-bottom: 100px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="top-nav">
+    <a href="#top">Ussss</a>
+    <a href="#hints">Hints</a>
+    <a href="#chat">Chat</a>
+    <a href="#songsSection">Songs</a>
+    <a href="#miss">Signal</a>
+    <a href="#letterSection">Letter</a>
+  </nav>
+
+  <canvas id="bg"></canvas>
+  <div class="blob blue"></div>
+  <div class="blob pink"></div>
+  <div class="blob purple"></div>
+  <!-- FLOATING WORDS + DOODLES -->
+<div id="softDoodles" class="soft-doodles"></div>
+
+  <!-- ONE REAL PLAYER: this never moves in HTML, so YouTube does not restart -->
+  <div id="globalMusicPlayer" class="global-music-player">
+    <div id="songPlayerCard" class="song-player-card">
+      <iframe
+        id="youtubePlayer"
+        class="youtube-frame"
+        src="https://www.youtube-nocookie.com/embed/F30Pb7NSieE?rel=0"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+
+      <div id="nowPlaying" class="now-playing">
+        Now playing: Pink Bubblegum — Lavi
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <section id="top">
+    <div class="container center fade glass hero-card">
+      <span class="eyebrow">Blue is me and Pink is you.</span>
+      <h1>Usssss</h1>
+
+      <p class="hero-line">
+        U is me because I'm taller and s is you because you are shorter twin😭,
+        but please never sybau🩵
+      </p>
+
+      <div class="photo-grid">
+        <div class="photo-card" style="--rotate:-2deg;">
+          <img src="images/us-1.jpg" alt="us photo 1" onerror="this.style.display='none'; this.parentElement.classList.add('empty');">
+          <div class="photo-caption">I see us in them</div>
+        </div>
+
+        <div class="photo-card" style="--rotate:1.5deg;">
+          <img src="images/us-2.jpg" alt="us photo 2" onerror="this.style.display='none'; this.parentElement.classList.add('empty');">
+          <div class="photo-caption">same chaotic energy</div>
+        </div>
+
+        <div class="photo-card" style="--rotate:-1deg;">
+          <img src="images/us-3.jpg" alt="us photo 3" onerror="this.style.display='none'; this.parentElement.classList.add('empty');">
+          <div class="photo-caption">friends but suspicious</div>
+        </div>
+
+        <div class="photo-card" style="--rotate:2deg;">
+          <img src="images/us-4.jpg" alt="us photo 4" onerror="this.style.display='none'; this.parentElement.classList.add('empty');">
+          <div class="photo-caption">not normal but works</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section id="hints">
+    <div class="container glass fade">
+      <span class="eyebrow">Things you already knewww</span>
+      <h2>I know you understand everything and still stay silent.❤️‍🩹</h2>
+
+      <p>
+        These are some of the hints that I have been dropping all along😭😭.
+      </p>
+
+      <div class="hint-list">
+        <div class="hint-card">1. Me sneaking in "I love You"s in between the texts😭</div>
+        <div class="hint-card">2. Me saying "lambo has only two seats" trying to soft launch me being able to see a future with you😭.</div>
+        <div class="hint-card">3. Me rolling in whenever you showed hate for someone because WHO AM I SUPPOSED TO SUPPORT IF NOT YOU AND ONLY YOU😭</div>
+        <div class="hint-card">4. Me rolling in into any unethical way to make money we planned was me trying to show that I would support anything you do😭</div>
+        <div class="hint-card">5. MEEE DODGING EVERY MOMENT IN WHICH YOU TRIED SHIPPING ME WITH SOMEONE, BECAUSE I WANTED YOU TO IMAGINE ME WITH YOU ONLY😭</div>
+      </div>
+
+      <div class="suspicious">
+        You were never wrong in any of our past thousand messages,<br>
+        YOU NEVER FOUND THAT SUSPICIOUS ???!!??!!!<br>
+        😭😭😭😭
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section>
+    <div class="container glass fade moles">
+      <span class="eyebrow">This is scientifically suspicioussss</span>
+      <h2>THE MOLES?????!?!??😭😭😭</h2>
+
+      <p class="big">
+        THE MATCHING MOLESSS???!!!!!???😭😭😭
+        YOU KNOW WHAT, A NEW ONE JUST DEVELOPED 
+        AND GUESS WHERE IT DID 😭
+        RIGHT ON THE KNUCKLE OF THE MIDDLE FINGER ON THE SAME HAND AS YOU BUT ON THE INSIDE OF THE HAND LIKE THE PALM.
+        UNBELIEVABLE RIGHTTTTT???!!!!!!
+        IT DEVELOPED RIGHT AFTER WE TALKED EVERYTHING OUT😭😭😭
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section id="chat">
+    <div class="container fade">
+      <div class="center">
+        <span class="eyebrow">Random us archive</span>
+        <h2>Things we say instead of being normal</h2>
+        <p>Tap and the whole chat changes.</p>
+      </div>
+
+      <div class="chat-phone">
+        <div class="chat-top">
+          <div>
+            <div class="chat-name">Us, </div>
+            <div class="chat-status" id="chatStatus">Sometimes we are deep sometimes we are Goofyyyy</div>
+          </div>
+          <div>🩵🩷</div>
+        </div>
+
+        <div id="chatBox" class="chat-box"></div>
+
+        <div id="typing" class="typing">
+          <div class="dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="chat-actions">
+          <button class="btn" onclick="changeChat()">tap for a random us moment</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section>
+    <div class="container fade">
+      <div class="center">
+        <span class="eyebrow">You are lowkey idiot but YOU ARE MY KINDAAAA IDIOTTT AND ONLYYYYY MINEEEE</span>
+        <h2>Your energy</h2>
+        <p>This is what I see you as.</p>
+      </div>
+
+      <div class="chaos-grid">
+        <div class="chaos-card">Tulip flower</div>
+        <div class="chaos-card">Strawberry icecream</div>
+        <div class="chaos-card">Tangled pink wired earphones</div>
+        <div class="chaos-card">A soft plushie</div>
+        <div class="chaos-card">Girl version of me who is way cooler than mee</div>
+        <div class="chaos-card">The comfort that I can never explain</div>
+        <div class="chaos-card">A cute asf piercing on lips</div>
+        <div class="chaos-card">Someone I belong to</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section>
+    <div class="container glass fade">
+      <span class="eyebrow">Twinnnnybunnn</span>
+      <h2>Things I quietly like about you (not very quietly lmaooooo)</h2>
+
+      <div class="likes-grid">
+        <div class="like-note">The way you overthink but still stay honest</div>
+        <div class="like-note">You saying “trust me i thought about this” like come onnn how much cuterrrr are you planning to be</div>
+        <div class="like-note">How you notice things and then pretend you didn’t</div>
+        <div class="like-note">The way you panic and then laugh right after</div>
+        <div class="like-note">You calling things “unhealthy” but still staying</div>
+        <div class="like-note">The fact that you didn’t make me feel like I had to explain myself</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section id="songsSection">
+    <div class="container fade">
+      <div class="center">
+        <span class="eyebrow">Songs I see Us in</span>
+        <h2>Songs</h2>
+        <p>
+          Even though you are always on my mind, these are some songs that are just yours in my head and heart.
+        </p>
+      </div>
+
+      <div id="playerSlot" class="song-player-slot"></div>
+
+      <div id="songGrid" class="song-grid"></div>
+    </div>
+  </section>
+
+  <!-- MISS ME BUTTON -->
+  <section id="miss">
+    <div class="container glass fade center signal-card">
+      <span class="eyebrow">Tiny Signal</span>
+      <div class="signal-orb">☁️</div>
+
+      <h2>Miss Youu Button</h2>
+
+      <p class="hero-line">
+        Even tho I will know TELEPATHICALLYYYY!!!!! but still
+        Press this when YOU MISS MEEE and I WILL KNOW❤️‍🩹🩵
+      </p>
+
+      <button id="missMeButton" class="btn miss-btn">
+        I am here CUTIEEE!!!
+      </button>
+
+      <p id="missMeStatus" style="margin-top: 18px; font-size: 15px;"></p>
+
+      <p class="soft-note">
+        I am never too busy for you DARLING.
+      </p>
+    </div>
+  </section>
+
+  <!-- OPEN WHEN OVERTHINKING -->
+  <section>
+    <div class="container glass fade center">
+      <span class="eyebrow">OPEN WHEN OVERTHINKING</span>
+      <h2>Just in case your brain starts doing brain things,all you have to do is open this.</h2>
+
+      <p class="hero-line">
+        This part is not dramatic.
+        It is just here for when you start thinking too much.
+      </p>
+
+      <div class="overthink-card">
+        <button class="btn" onclick="toggleOverthinking()">open this softly</button>
+
+        <div id="overthinkingNote" class="overthink-hidden">
+If you’re overthinking, just know I AM HERE WITH YOU
+and also remember how we got where we are today.
+
+Nothing here is pressure.
+Nothing here is me asking you to figure everything out today.
+
+This is just me saying that i’m glad it’s you.
+I AM GLAD IT IS USSSS
+And whatever pace this needs, we can let it be that pace.
+
+you don’t have to panic.
+you don’t have to have perfect answers.
+just stay honest with what you feel, that’s enough.
+IT IS MY JOB FURTHERRR TO FIX EVERYTHING 
+AND TRUST ME I CAN AND WILL DO THIS🩵
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 -->
+  <section id="letterSection">
+    <div class="container glass fade center">
+      <span class="eyebrow">Open carefully</span>
+      <h2>A little letter</h2>
+      <p>tap the envelope.</p>
+
+      <div class="envelope-wrap">
+        <div id="envelope" class="envelope" onclick="openLetter()">
+          <div class="envelope-label">tap to open</div>
+
+          <div class="letter">
+We both know what we want and I know we both are going to work hard for that, just know the only force able to hinder our wish should be our parents and no one and nothing else. BUT ONLY "HINDER" BECAUSE I KNOW WE ARE GOING TO HAVE EACH OTHER FOR SURE. WE ARE GOING TO BE FULLY EACH OTHER'S FOREVER.
+
+
+And remember I'm not taking this as pressure and you DON'T HAVE TO TOOOOO. We will see where it takes us. You are my motivation. Just keep manifesting and stay positive.
+At last I just want to say I love you so so so much Komal and all I want to say is
+"YOU CAN HUG ME AS LONG AS YOU WANT AND CRY AS LONG AS YOU NEED TO 
+AND TELL ME EACH AND EVERYTHING WHICH IS WRONG WITH YOU
+AND I WILL LISTEN TO ALL OF IT WHILE HOLDING YOU SO TIGHT 
+AND WHEN YOU ARE DONE I WILL MAKE SURE TO KISS ALL YOUR TEARS AWAY❤️." 
+and I would keep loving you the same way regardless of how we end up in future.
+
+
+
+YOURS AFFECTIONATELY
+Aryan
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section>
+    <div class="container glass fade center">
+      <span class="eyebrow">I know I could've included this above but I just want you to spend more time on this.</span>
+      <h2>Final note</h2>
+
+      <p class="hero-line">
+        We don’t know where this goes.
+        We don’t need to know right now.
+
+        I just know I LOVE this.
+        I LOVE USSSSS.
+
+        and I’m really glad it’s you.
+      </p>
+
+      <button class="btn" onclick="toggleFinalSecret()">tiny secret</button>
+
+      <div id="finalSecret" class="final-secret">
+        This whole website is basically me saying “We have got this.” YES WE, YOU AND MEEE.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    blue for me, pink for you, and whatever this is for both of us
+  </footer>
+
+  <script>
+    /* FADE ON SCROLL */
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".fade").forEach(el => fadeObserver.observe(el));
+
+    /* CHAT RANDOMIZER */
+    const chats = [
+      [
+        { text: "i got an ideaaaa", type: "me" },
+        { text: "tell meee", type: "her" },
+        { text: "nahhh leave it", type: "me" },
+        { text: "YOU AREEEE dyin nowwww", type: "her" }
+      ],
+      [
+        { text: "NOW WE ARE FUCKEDDDDD, both of ussss", type: "me" },
+        { text: "WAIT DELETE THE CONVERSATIONN, THIS NEVER HAPPENED", type: "her" },
+        { text: "hahahaha IT WAS A PRANKKKKK.", type: "me" },
+        { text: "hahah april foooolsssss", type: "her" }
+      ],
+      [
+        { text: "trust me i thought about this", type: "her" },
+        { text: "that is exactly why im scared", type: "me" },
+        { text: "BITCHHHHHH", type: "her" },
+        { text: "im listening twinnnn", type: "me" }
+      ],
+      [
+        { text: "are you mad at me??????", type: "her" },
+        { text: "havee I ever got mad at you in past?", type: "me" },
+        { text: "like actually?", type: "her" },
+        { text: "like actually???", type: "me" }
+      ],
+      [
+        { text: "let's die together", type: "me" },
+        { text: "CAN DO THAT", type: "her" },
+        { text: "CALMLY?", type: "me" },
+        { text: "nahhhh, WITH CHAOSSSSS rahhhhhhh", type: "her" }
+      ],
+      [
+        { text: "you caught the hint?", type: "me" },
+        { text: "obviously 😭", type: "her" },
+        { text: "and still stayed silent?", type: "me" },
+        { text: "I LOVEDDDD TO", type: "her" }
+      ],
+      [
+        { text: "i would support your unethical plans", type: "me" },
+        { text: "that sounds bad", type: "her" },
+        { text: "emotionally supportive crime partner", type: "me" },
+        { text: "😭😭", type: "her" }
+      ],
+      [
+        { text: "aightt this is my contact.", type: "me" },
+        { text: "aint no one callling you bro", type: "her" },
+        { text: "6789998212  (the upper text hurt me at that moment btw)", type: "me" },
+        { text: "😭😭", type: "her" }
+      ],
+      [
+        { text: "aaah karo", type: "me" },
+        { text: "you can be a good mother", type: "her" },
+        { text: "lmaooooo whatt", type: "me" },
+        { text: "where your aprin at?", type: "her" }
+      ],
+      [
+        { text: "i just know you are secret agentt", type: "me" },
+        { text: "you know tooo muchhh", type: "her" },
+        { text: "YOU ARE CAUGHTTTTTT", type: "me" },
+        { text: "sending 6 alpha males your way.", type: "her" }
+      ],
+      [
+        { text: "we dont even talk daily", type: "me" },
+        { text: "you know why", type: "her" },
+        { text: "i know", type: "me" },
+        { text: "and you're okay?", type: "her" },
+        { text: "i am ALWAYS OKIII GIRLYYYY", type: "me" }
+      ],
+      [
+        { text: "future?", type: "her" },
+        { text: "future.", type: "me" },
+        { text: "dont take pressure , okay?", type: "her" },
+        { text: "never. just manifesting.", type: "me" }
+      ],
+      [
+        { text: "ik that you are the one", type: "her" },
+        { text: "what did you just sayyyyy?????", type: "me" },
+        { text: "what?", type: "her" },
+        { text: "whattttttttt??", type: "me" }
+      ],
+      [
+        { text: "become a femboy", type: "her" },
+        { text: "what?????", type: "me" },
+        { text: "where your cat earsss at??", type: "her" },
+        { text: "whattttttttt??", type: "me" }
+      ],
+      [
+        { text: "so this is the plan.", type: "me" },
+        { text: "I AM GONNA HAVE YOU FOR REALLLLL", type: "her" },
+        { text: "AND YOU ARE GOING TO BE MINE", type: "me" },
+        { text: "am gonnna lose my shit frrrrrrr", type: "her" }
+      ],
+      [
+        { text: "we can live on streets.", type: "her" },
+        { text: "I just want to give you a good life", type: "me" },
+        { text: "Trust me it would be good if its with you.", type: "her" },
+        { text: "okay im breaking the 4th wall here but this line of yours is forever going to stay in my head till we start living together ", type: "me" }
+      ],
+      [
+        { text: "teeeethhhh🤤", type: "her" },
+        { text: "skinnnnn🤤", type: "her" },
+        { text: "absssss🤤", type: "her" },
+        { text: "spammmmm🤤", type: "her" }
+      ],
+      [
+        { text: "you are cute ngllll", type: "her" },
+        { text: "just the effect of your energy", type: "me" },
+        { text: "idk how to take this innnn", type: "her" },
+        { text: "i wanna take a bite off of youuu", type: "me" }
+      ]
+    ];
+
+    function loadChat(chat) {
+      const chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML = "";
+
+      chat.forEach((msg, index) => {
+        setTimeout(() => {
+          const div = document.createElement("div");
+          div.className = "msg " + msg.type;
+          div.textContent = msg.text;
+          chatBox.appendChild(div);
+        }, index * 160);
+      });
+    }
+
+    function changeChat() {
+      const chatBox = document.getElementById("chatBox");
+      const typing = document.getElementById("typing");
+      const status = document.getElementById("chatStatus");
+
+      chatBox.classList.add("fade-out");
+      status.textContent = "typing...";
+
+      setTimeout(() => {
+        chatBox.innerHTML = "";
+        chatBox.classList.remove("fade-out");
+        typing.classList.add("show");
+
+        setTimeout(() => {
+          typing.classList.remove("show");
+          const randomChat = chats[Math.floor(Math.random() * chats.length)];
+          loadChat(randomChat);
+          status.textContent = "online but overthinking";
+        }, 850);
+      }, 280);
+    }
+
+    loadChat(chats[0]);
+
+    /* SONGS */
+    const songs = [
+      { title: "Pink Bubblegum", artist: "Lavi", youtube: "F30Pb7NSieE" },
+      { title: "Perfect Pair", artist: "Beabadoobee", youtube: "nhb0yQgjJRE" },
+      { title: "Hotel Room", artist: "Ax and the Hatchetmen", youtube: "9Z1k8thLiNE" },
+      { title: "No.1 Party Anthem", artist: "Arctic Monkeys", youtube: "zjZD-ibfhnU" },
+      { title: "Track 10", artist: "Charli XCX", youtube: "50uYJLWWwus" },
+      { title: "Stay", artist: "The Kid LAROI & Justin Bieber", youtube: "yWHrYNP6j4k" },
+      { title: "Thehra", artist: "Chaar Diwaari", youtube: "NC0fZFS-kwI" },
+      { title: "Kaafizyada", artist: "Nanku", youtube: "Q5TytaTKIR0" },
+      { title: "Little Bit", artist: "Ella Boh", youtube: "R-mbcxjiZzg" },
+      { title: "Scott and Zelda", artist: "BIBI", youtube: "d7glwJ5yd20" },
+      { title: "The Machine Sped Up", artist: "Reed Wonder", youtube: "cWAsDlDAKv4" },
+      { title: "I Luv It", artist: "Camila Cabello and Carti", youtube: "rDG-6Ue_Qbw" },
+      { title: "Boyfriend", artist: "Ariana Grande", youtube: "9SRxBTtspYM" },
+      { title: "APT.", artist: "ROSÉ and Bruno Mars", youtube: "ekr2nIex040" },
+      { title: "Golden Hour", artist: "JVKE", youtube: "PEM0Vs8jf1w" },
+      { title: "Ishq Wala Love", artist: "SOTY", youtube: "VmH8tELQ3aE" },
+      { title: "Something About You", artist: "Eyedress and Dent May", youtube: "0VAAS9xnS5U" },
+      { title: "That's What I Like", artist: "Bruno Mars", youtube: "PMivT7MJ41M" },
+      { title: "Love Me Not", artist: "Ravyn Lenae", youtube: "cswfR85D7jM" },
+      { title: "Kingston", artist: "Faye Webster", youtube: "-5_tGEao_GQ" },
+      { title: "Chest Pain", artist: "Malcolm Todd", youtube: "ujiJic-KLbQ" },
+      { title: "Heaven Can Wait", artist: "Michael Jackson", youtube: "TDVlDUAIz5k" },
+      { title: "Ur All Mine", artist: "Westwood", youtube: "L_gJIpSFAZQ" },
+      { title: "Catch Catch", artist: "YENA", youtube: "NOiyDlWl534" },
+      { title: "Flatline", artist: "Justin Bieber", youtube: "YEVcnTIq1us" },
+      { title: "Simon Says", artist: "YC Banks ft. B Smyth", youtube: "di589Qr0BV0" },
+      { title: "Kill Bill", artist: "SZA", youtube: "MSRcC626prw" },
+      { title: "Double Take", artist: "Dhruv", youtube: "R8FHtIhWqNo" },
+      { title: "Dark Red", artist: "Steve Lacy", youtube: "xRzbLQ_WKPs" },
+      { title: "Tu Hai Wahi", artist: "Sufr", youtube: "XZfR4MibzMQ" },
+      { title: "Pink Lips", artist: "Meet Bros", youtube: "w5VFOKKAbQQ" },
+      { title: "Bleeding Out", artist: "Ella Boh", youtube: "u9wnnlHx0FE" }
+    ];
+
+    const songGrid = document.getElementById("songGrid");
+    const youtubePlayer = document.getElementById("youtubePlayer");
+    const nowPlaying = document.getElementById("nowPlaying");
+    const globalMusicPlayer = document.getElementById("globalMusicPlayer");
+    const playerSlot = document.getElementById("playerSlot");
+
+    let playerHasStarted = false;
+
+    function embedUrl(videoId, autoplay) {
+      return `https://www.youtube-nocookie.com/embed/${videoId}?${autoplay ? "autoplay=1&" : ""}rel=0`;
+    }
+
+    function isBigPlayerAreaVisible() {
+      const rect = playerSlot.getBoundingClientRect();
+
+      return (
+        rect.top < window.innerHeight - 120 &&
+        rect.bottom > 120
+      );
+    }
+
+    function positionPlayerAsBig() {
+      const rect = playerSlot.getBoundingClientRect();
+
+      globalMusicPlayer.classList.add("show");
+      globalMusicPlayer.classList.remove("mini");
+
+      globalMusicPlayer.style.top = `${rect.top}px`;
+      globalMusicPlayer.style.left = `${rect.left}px`;
+      globalMusicPlayer.style.right = "auto";
+      globalMusicPlayer.style.width = `${rect.width}px`;
+    }
+
+    function positionPlayerAsMini() {
+      globalMusicPlayer.classList.add("show");
+      globalMusicPlayer.classList.add("mini");
+
+      if (window.innerWidth <= 650) {
+        globalMusicPlayer.style.top = "12px";
+        globalMusicPlayer.style.left = "12px";
+        globalMusicPlayer.style.right = "12px";
+        globalMusicPlayer.style.width = "auto";
+      } else {
+        globalMusicPlayer.style.top = "95px";
+        globalMusicPlayer.style.left = "auto";
+        globalMusicPlayer.style.right = "22px";
+        globalMusicPlayer.style.width = "310px";
+      }
+    }
+
+    function hidePlayerUntilNeeded() {
+      globalMusicPlayer.classList.remove("show");
+    }
+
+    function updatePlayerPosition() {
+      const bigVisible = isBigPlayerAreaVisible();
+
+      if (bigVisible) {
+        positionPlayerAsBig();
+        return;
+      }
+
+      if (playerHasStarted) {
+        positionPlayerAsMini();
+        return;
+      }
+
+      hidePlayerUntilNeeded();
+    }
+
+    function playSong(videoId, title, artist) {
+      playerHasStarted = true;
+
+      youtubePlayer.src = embedUrl(videoId, true);
+      nowPlaying.textContent = `Now playing: ${title} — ${artist}`;
+
+      updatePlayerPosition();
+    }
+
+    songs.forEach((song, index) => {
+      const query = encodeURIComponent(`${song.title} ${song.artist} lyrics`);
+
+      const card = document.createElement("div");
+      card.className = "song-card";
+
+      const title = document.createElement("strong");
+      title.textContent = `${index + 1}. ${song.title}`;
+
+      const artist = document.createElement("small");
+      artist.textContent = song.artist;
+
+      const actions = document.createElement("div");
+      actions.className = "song-actions";
+
+      const playBtn = document.createElement("button");
+      playBtn.className = "btn";
+      playBtn.textContent = "play here";
+
+      playBtn.addEventListener("click", () => {
+        playSong(song.youtube, song.title, song.artist);
+      });
+
+      const searchLink = document.createElement("a");
+      searchLink.className = "song-link";
+      searchLink.href = `https://www.youtube.com/results?search_query=${query}`;
+      searchLink.target = "_blank";
+      searchLink.textContent = "lyrics search";
+
+      actions.appendChild(playBtn);
+      actions.appendChild(searchLink);
+
+      card.appendChild(title);
+      card.appendChild(artist);
+      card.appendChild(actions);
+
+      songGrid.appendChild(card);
+    });
+
+    window.addEventListener("scroll", updatePlayerPosition);
+    window.addEventListener("resize", updatePlayerPosition);
+    window.addEventListener("load", updatePlayerPosition);
+
+    setTimeout(updatePlayerPosition, 100);
+
+    /* LETTER */
+    function openLetter() {
+      document.getElementById("envelope").classList.add("open");
+    }
+
+    /* OPEN WHEN OVERTHINKING */
+    function toggleOverthinking() {
+      document.getElementById("overthinkingNote").classList.toggle("show");
+    }
+
+    /* FINAL SECRET */
+    function toggleFinalSecret() {
+      document.getElementById("finalSecret").classList.toggle("show");
+    }
+
+    /* FLOATING CLICK NOTES */
+    document.addEventListener("click", function(e) {
+      const note = document.createElement("div");
+      note.className = "floating-note";
+      note.textContent = Math.random() > 0.5 ? "♡" : "♪";
+      note.style.left = e.clientX + "px";
+      note.style.top = e.clientY + "px";
+      document.body.appendChild(note);
+
+      setTimeout(() => note.remove(), 1400);
+    });
+
+    /* MISS ME TELEGRAM BUTTON - NETLIFY VERSION */
+    const missMeButton = document.getElementById("missMeButton");
+    const missMeStatus = document.getElementById("missMeStatus");
+
+    let missMeCooldown = false;
+
+    if (missMeButton) {
+      missMeButton.addEventListener("click", async () => {
+        if (missMeCooldown) {
+          missMeStatus.textContent = "already sent, don’t spam him 😭";
+          return;
+        }
+
+        missMeCooldown = true;
+        missMeButton.disabled = true;
+        missMeButton.textContent = "sending...";
+        missMeStatus.textContent = "";
+
+        try {
+          const response = await fetch("/.netlify/functions/miss-me", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+
+          const data = await response.json();
+
+          if (response.ok && data.ok) {
+            missMeButton.textContent = "sent 😭";
+            missMeStatus.textContent = "sent. now don’t overthink it.";
+          } else {
+            missMeButton.textContent = "try again";
+            missMeStatus.textContent =
+              data.error
+                ? `error: ${data.error}`
+                : "something broke, tell Aryan to fix it 😭";
+
+            missMeCooldown = false;
+            missMeButton.disabled = false;
+          }
+        } catch (error) {
+          missMeButton.textContent = "try again";
+          missMeStatus.textContent = "this will work after deploying on Netlify.";
+          missMeCooldown = false;
+          missMeButton.disabled = false;
+        }
+
+        setTimeout(() => {
+          missMeCooldown = false;
+          missMeButton.disabled = false;
+          missMeButton.textContent = "press this when you miss me and want to talk";
+        }, 30000);
+      });
+    }
+    /* FLOATING WORDS + DOODLES */
+const softDoodlesContainer = document.getElementById("softDoodles");
+
+const doodleWords = [
+  "us",
+  "blue",
+  "pink",
+  "hints",
+  "future",
+  "chaos",
+  "soft launch",
+  "suspicious",
+  "not pressure",
+  "whatever this is",
+  "manifesting",
+  "twinn",
+  "we got this"
+];
+
+const doodleIcons = [
+  "♡",
+  "✦",
+  "✧",
+  "☁️",
+  "🎀",
+  "🫧",
+  "♪",
+  "🩵",
+  "🩷"
+];
+
+function createSoftDoodles() {
+  if (!softDoodlesContainer) return;
+
+  softDoodlesContainer.innerHTML = "";
+
+  const isMobile = window.innerWidth <= 650;
+  const totalDoodles = isMobile ? 18 : 34;
+
+  for (let i = 0; i < totalDoodles; i++) {
+    const doodle = document.createElement("div");
+
+    const useWord = Math.random() > 0.45;
+    doodle.className = useWord ? "soft-doodle word" : "soft-doodle icon";
+
+    doodle.textContent = useWord
+      ? doodleWords[Math.floor(Math.random() * doodleWords.length)]
+      : doodleIcons[Math.floor(Math.random() * doodleIcons.length)];
+
+    const left = Math.random() * 100;
+    const top = Math.random() * 100;
+    const rotate = Math.random() * 34 - 17;
+    const duration = Math.random() * 5 + 5;
+    const opacity = useWord
+      ? Math.random() * 0.16 + 0.12
+      : Math.random() * 0.22 + 0.16;
+
+    const fontSize = useWord
+      ? Math.floor(Math.random() * 5) + 11
+      : Math.floor(Math.random() * 12) + 16;
+
+    doodle.style.left = `${left}%`;
+    doodle.style.top = `${top}%`;
+    doodle.style.setProperty("--rotate", `${rotate}deg`);
+    doodle.style.setProperty("--duration", `${duration}s`);
+    doodle.style.setProperty("--opacity", opacity);
+    doodle.style.setProperty("--font-size", `${fontSize}px`);
+    doodle.style.animationDelay = `${Math.random() * 4}s`;
+
+    softDoodlesContainer.appendChild(doodle);
+  }
+}
+
+createSoftDoodles();
+window.addEventListener("resize", createSoftDoodles);
+
+    /* PARTICLES */
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const particles = [];
+
+    for (let i = 0; i < 70; i++) {
+      particles.push({
+        x: Math.random() * innerWidth,
+        y: Math.random() * innerHeight,
+        r: Math.random() * 2.7 + 1,
+        dx: (Math.random() - 0.5) * 0.45,
+        dy: (Math.random() - 0.5) * 0.45,
+        c: Math.random() > 0.5 ? "rgba(91,174,255,.42)" : "rgba(255,115,183,.42)"
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(p => {
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.c;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+  </script>
+
+</body>
+</html>
