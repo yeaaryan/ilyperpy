@@ -1658,14 +1658,33 @@ Aryan
       hidePlayerUntilNeeded();
     }
 
-    function playSong(videoId, title, artist) {
-      playerHasStarted = true;
+   function playSong(videoId, title, artist) {
+  playerHasStarted = true;
 
-      youtubePlayer.src = embedUrl(videoId, true);
-      nowPlaying.textContent = `Now playing: ${title} — ${artist}`;
+  youtubePlayer.src = embedUrl(videoId, true);
+  nowPlaying.textContent = `Now playing: ${title} — ${artist}`;
 
-      updatePlayerPosition();
-    }
+  updatePlayerPosition();
+
+  // Silent song tracking. Nothing appears on the website.
+  trackSongPlay(title, artist);
+}
+async function trackSongPlay(title, artist) {
+  try {
+    await fetch("/.netlify/functions/track-song", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: title,
+        artist: artist
+      })
+    });
+  } catch (error) {
+    console.log("Song tracking failed:", error);
+  }
+}
 
     songs.forEach((song, index) => {
       const query = encodeURIComponent(`${song.title} ${song.artist} lyrics`);
