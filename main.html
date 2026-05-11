@@ -1298,6 +1298,32 @@ footer,
         padding-bottom: 100px;
       }
     }
+    .whatsapp-contact{
+    position: fixed;
+    top: 22px;
+    right: 28px;
+    z-index: 9999;
+
+    padding: 10px 18px;
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(12px);
+
+    color: #555;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+
+    border: 1px solid rgba(255,255,255,0.4);
+
+    transition: 0.25s ease;
+}
+
+.whatsapp-contact:hover{
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.75);
+}
   </style>
 </head>
 
@@ -1311,6 +1337,16 @@ footer,
     <a href="#miss">Signal</a>
     <a href="#letterSection">Letter</a>
   </nav>
+  <nav class="top-nav">
+  ...
+</nav>
+
+<a href="https://wa.me/918627882031"
+   target="_blank"
+   class="whatsapp-contact"
+   onclick="trackWhatsappClick()">
+   📞ANYTIME TWIN, ANYTIMEEEE!!!!!!!!
+</a>
 
   <canvas id="bg"></canvas>
   <div class="blob blue"></div>
@@ -1599,7 +1635,7 @@ AND TRUST ME I CAN AND WILL DO THIS🩵
       <p>tap the envelope.</p>
 
       <div class="envelope-wrap">
-        <div id="envelope" class="envelope" onclick="openLetter()">
+        <div id="envelope" class="envelope" onclick="openLetter()"trackLetterOpen();>
           <div class="envelope-label">tap to open</div>
 
           <div class="letter">
@@ -1993,11 +2029,45 @@ async function trackSongPlay(title, artist) {
     window.addEventListener("load", updatePlayerPosition);
 
     setTimeout(updatePlayerPosition, 100);
+    
 
     /* LETTER */
     function openLetter() {
       document.getElementById("envelope").classList.add("open");
     }
+
+    /* WHATSAPP BUTTON TRACKING */
+async function trackWhatsappClick() {
+  try {
+    await fetch(TELEGRAM_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        action: "whatsapp_button_clicked"
+      })
+    });
+  } catch (err) {
+    console.log("whatsapp tracking failed");
+  }
+}
+/* LETTER OPEN TRACKING */
+async function trackLetterOpen() {
+  try {
+    await fetch(TELEGRAM_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        action: "letter_opened"
+      })
+    });
+  } catch (err) {
+    console.log("letter tracking failed");
+  }
+}
 
     /* OPEN WHEN OVERTHINKING */
     function toggleOverthinking() {
