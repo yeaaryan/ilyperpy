@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>nothing serious</title>
+<title>So you found this huh?</title>
 
 <style>
 * {
@@ -17,149 +17,439 @@ html {
 }
 
 body {
-  font-family: Inter, system-ui, sans-serif;
-  background: #080808;
-  color: #bdbdbd;
   min-height: 100vh;
-  overflow-x: hidden;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(99, 178, 255, 0.16), transparent 34%),
+    radial-gradient(circle at 85% 20%, rgba(255, 104, 177, 0.15), transparent 34%),
+    radial-gradient(circle at 50% 95%, rgba(190, 160, 255, 0.12), transparent 38%),
+    #08090d;
+  color: #f7f7fb;
+  overflow: hidden;
 }
 
-body::before {
-  content: "";
+body.unlocking {
+  animation: unlockBg 1.4s ease forwards;
+}
+
+@keyframes unlockBg {
+  0% {
+    background-color: #08090d;
+  }
+
+  100% {
+    background:
+      radial-gradient(circle at 15% 15%, rgba(130, 210, 255, 0.52), transparent 34%),
+      radial-gradient(circle at 85% 20%, rgba(255, 150, 203, 0.55), transparent 34%),
+      radial-gradient(circle at 50% 95%, rgba(200, 180, 255, 0.35), transparent 38%),
+      linear-gradient(135deg, #dff3ff, #ffe3f1, #eef0ff);
+  }
+}
+
+.noise {
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(110, 140, 255, 0.12), transparent 35%),
-    radial-gradient(circle at 80% 15%, rgba(255, 120, 180, 0.10), transparent 35%),
-    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.04), transparent 40%);
+  opacity: 0.08;
   pointer-events: none;
-  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
 }
 
-main {
-  width: min(980px, 92%);
-  margin: auto;
+.blob {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+  animation: floatBlob 7s ease-in-out infinite alternate;
+  pointer-events: none;
 }
 
-section {
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 70px 0;
+.blob.blue {
+  background: #65bdff;
+  top: -110px;
+  left: -90px;
 }
 
-.fake-tag {
-  display: inline-block;
-  width: fit-content;
-  padding: 7px 12px;
-  border: 1px solid #222;
-  border-radius: 999px;
-  color: #777;
+.blob.pink {
+  background: #ff75b9;
+  right: -120px;
+  bottom: -100px;
+  animation-delay: 1.2s;
+}
+
+.blob.purple {
+  background: #bba5ff;
+  left: 45%;
+  bottom: -170px;
+  animation-delay: 2s;
+}
+
+@keyframes floatBlob {
+  to {
+    transform: translate(36px, -34px) scale(1.1);
+  }
+}
+
+.doodle {
+  position: fixed;
+  color: rgba(255,255,255,.16);
+  font-weight: 900;
+  pointer-events: none;
+  animation: drift 6s ease-in-out infinite alternate;
+}
+
+.doodle.one {
+  top: 13%;
+  left: 12%;
+  font-size: 14px;
+  transform: rotate(-12deg);
+}
+
+.doodle.two {
+  top: 76%;
+  left: 16%;
+  font-size: 22px;
+  animation-delay: .8s;
+}
+
+.doodle.three {
+  top: 18%;
+  right: 15%;
+  font-size: 18px;
+  animation-delay: 1.4s;
+}
+
+.doodle.four {
+  bottom: 18%;
+  right: 18%;
   font-size: 13px;
-  margin-bottom: 20px;
+  transform: rotate(10deg);
+  animation-delay: 2s;
+}
+
+@keyframes drift {
+  to {
+    transform: translateY(-22px) rotate(8deg);
+    opacity: .5;
+  }
+}
+
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.gate-card {
+  width: min(540px, 100%);
+  padding: clamp(26px, 5vw, 46px);
+  border-radius: 34px;
+  background: rgba(255,255,255,0.075);
+  border: 1px solid rgba(255,255,255,0.13);
+  backdrop-filter: blur(22px);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.38),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+  text-align: center;
+  transform: translateY(18px);
+  opacity: 1;
+  animation: cardIn .7s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.gate-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(122, 200, 255, .16), transparent 30%),
+    radial-gradient(circle at 88% 10%, rgba(255, 126, 190, .16), transparent 30%);
+  pointer-events: none;
+}
+
+@keyframes cardIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.10);
+  color: rgba(255,255,255,.67);
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 18px;
 }
 
 h1 {
-  font-size: clamp(42px, 8vw, 88px);
-  color: #f5f5f5;
+  font-size: clamp(38px, 9vw, 68px);
+  line-height: .95;
   letter-spacing: -3px;
-  margin-bottom: 24px;
-}
-
-h2 {
-  color: #eeeeee;
-  font-size: clamp(26px, 5vw, 42px);
   margin-bottom: 16px;
+  background: linear-gradient(90deg, #dff2ff, #ffe1ef);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-p {
-  font-size: 18px;
-  line-height: 1.8;
-  max-width: 700px;
+.subtitle {
+  color: rgba(255,255,255,.65);
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0 auto 26px;
+  max-width: 420px;
 }
 
-.low-card {
-  background: rgba(255,255,255,0.035);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 22px;
-  padding: 26px;
-  margin-top: 18px;
-}
-
-.song-list {
-  display: grid;
-  gap: 14px;
-  margin-top: 24px;
-}
-
-.fake-song {
-  padding: 16px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
-}
-
-.fake-chat {
-  display: grid;
-  gap: 14px;
-  margin-top: 25px;
-}
-
-.bubble {
-  max-width: 70%;
-  padding: 13px 16px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-.bubble.me {
-  margin-left: auto;
-  color: #8f8f8f;
-}
-
-.end {
-  min-height: 100vh;
-  position: relative;
-  color: #555;
-}
-
-.hidden-trigger {
-  position: fixed;
-  right: 22px;
-  bottom: 22px;
-  padding: 8px 12px;
+.input-wrap {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 9px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-  color: #555;
-  font-size: 13px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.13);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  padding: 13px 14px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+input::placeholder {
+  color: rgba(255,255,255,.34);
+}
+
+.unlock-btn {
+  border: none;
+  outline: none;
   cursor: pointer;
-  opacity: 0.28;
-  transition: 0.25s ease;
+  padding: 13px 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #dff2ff, #ffe1ef);
+  color: #3f4157;
+  font-weight: 950;
+  transition: .25s ease;
+  white-space: nowrap;
 }
 
-.hidden-trigger:hover {
-  opacity: 1;
-  color: #fff;
-  transform: translateY(-3px);
+.unlock-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 36px rgba(255, 125, 190, .18);
 }
 
-.tiny {
-  font-size: 13px;
-  color: #555;
-  margin-top: 26px;
+.unlock-btn:disabled {
+  opacity: .65;
+  cursor: not-allowed;
 }
 
-@media(max-width: 600px) {
-  section {
-    min-height: 85vh;
-    padding: 55px 0;
+.status {
+  min-height: 54px;
+  margin-top: 18px;
+  display: grid;
+  place-items: center;
+  color: rgba(255,255,255,.72);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.status.error {
+  color: #ffd1e5;
+}
+
+.status.success {
+  color: #dff2ff;
+}
+
+.hint-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.ghost-btn {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: rgba(255,255,255,.52);
+  cursor: pointer;
+  font-weight: 850;
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  transition: .22s ease;
+}
+
+.ghost-btn:hover {
+  color: white;
+  background: rgba(255,255,255,.08);
+}
+
+.hint-box {
+  display: none;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.75);
+  font-size: 14px;
+  line-height: 1.6;
+  animation: pop .25s ease;
+}
+
+.hint-box.show {
+  display: block;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(.98);
   }
 
-  .bubble {
-    max-width: 86%;
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.progress {
+  display: none;
+  margin: 18px auto 0;
+  width: min(280px, 100%);
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.11);
+  overflow: hidden;
+}
+
+.progress.show {
+  display: block;
+}
+
+.progress span {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8ed2ff, #ff8cc7);
+}
+
+.progress.run span {
+  animation: loadBar 1.7s ease forwards;
+}
+
+@keyframes loadBar {
+  to {
+    width: 100%;
+  }
+}
+
+.reveal-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(142,210,255,.9), transparent 34%),
+    radial-gradient(circle at 80% 20%, rgba(255,140,199,.92), transparent 34%),
+    linear-gradient(135deg, #dff3ff, #ffe3f1, #eef0ff);
+  display: grid;
+  place-items: center;
+  transition: .5s ease;
+}
+
+.reveal-cover.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.reveal-text {
+  font-size: clamp(32px, 8vw, 72px);
+  font-weight: 1000;
+  letter-spacing: -3px;
+  background: linear-gradient(90deg, #5aaeff, #ff63ae);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: revealText .8s ease infinite alternate;
+}
+
+@keyframes revealText {
+  to {
+    transform: translateY(-8px) scale(1.03);
+  }
+}
+
+.shake {
+  opacity: 1 !important;
+  animation: shake .28s ease;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  25% {
+    transform: translateY(0) translateX(-8px);
+  }
+
+  75% {
+    transform: translateY(0) translateX(8px);
+  }
+}
+
+.tiny-note {
+  margin-top: 18px;
+  color: rgba(255,255,255,.32);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media(max-width: 560px) {
+  .input-wrap {
+    border-radius: 26px;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .unlock-btn {
+    width: 100%;
+  }
+
+  h1 {
+    letter-spacing: -2px;
   }
 }
 </style>
@@ -167,70 +457,199 @@ p {
 
 <body>
 
-<main>
+<div class="noise"></div>
+<div class="blob blue"></div>
+<div class="blob pink"></div>
+<div class="blob purple"></div>
 
-  <section>
-    <span class="fake-tag">made with questionable effort</span>
-    <h1>idk why i made this</h1>
-    <p>
-      yeah so like i guess i love you or something.
-      not a big deal tho.  
-      definitely not a whole thing.
-      very normal. very casual. very whatever.
-    </p>
-  </section>
+<div class="doodle one">not suspicious</div>
+<div class="doodle two">♡</div>
+<div class="doodle three">hidden for a reason</div>
+<div class="doodle four">blue + pink</div>
 
-  <section>
-    <h2>confession or whatever</h2>
-    <div class="low-card">
-      <p>
-        i could write something dramatic here but that sounds like effort,
-        so just pretend i said something really deep and meaningful.
-        anyway yeah. you matter. unfortunately.
+<div class="page">
+  <div id="gateCard" class="gate-card">
+    <div class="inner">
+      <span class="tag">secret gate</span>
+
+      <h1>So you found this, huh?</h1>
+
+      <p class="subtitle">
+        Hmmmmm, maybe this part is not as low effort as the first page made it look.
+        BUT YOU STILL NEED THE PASSWORD HEHEHEHEHEHHEHE.
+      </p>
+
+      <div class="input-wrap">
+        <input
+          id="passwordInput"
+          type="password"
+          placeholder="enter password"
+          autocomplete="off"
+        />
+        <button id="unlockBtn" class="unlock-btn" onclick="checkPassword()">
+          enter
+        </button>
+      </div>
+
+      <div id="status" class="status">
+        Try something only we would understand.
+      </div>
+
+      <div id="progress" class="progress">
+        <span></span>
+      </div>
+
+      <div class="hint-row">
+        <button class="ghost-btn" onclick="showHint()">need a hint?</button>
+      </div>
+
+      <div id="hintBox" class="hint-box">
+        WHAT DO WE SEEM TO SHARE ACCORDING TO US EVEN BEFORE WE WERE BORN?
+        LAST LETTER OF PASSWORD SHOULD BE SPAMMED TILL THE WORD REACHES A PERFECT LENGTH YOU KNOWWWW
+      </div>
+
+      <p class="tiny-note">
+        if you can't get in, call me @ 6789998212.
       </p>
     </div>
-  </section>
-
-  <section>
-    <h2>songs i guess</h2>
-
-    <div class="song-list">
-      <div class="fake-song">APT - Bruno Mars</div>
-      <div class="fake-song">Catch Catch - Yena</div>
-    </div>
-
-    <p class="tiny">
-      you don’t need songs, you have my playlist already.
-    </p>
-  </section>
-
-  <section>
-    <h2>actual conversation quality</h2>
-
-    <div class="fake-chat">
-      <div class="bubble me">“ok”</div>
-      <div class="bubble">“cool”</div>
-      <div class="bubble me">“whatever”</div>
-      <div class="bubble">“so romantic wow”</div>
-      <div class="bubble me">“i know right”</div>
-    </div>
-  </section>
-
-  <section class="end">
-    <h2>that’s it</h2>
-    <p>
-      nothing else here.  
-      no hidden thing.  
-      no secret.  
-      don’t inspect anything.
-    </p>
-  </section>
-
-</main>
-
-<div class="hidden-trigger" onclick="window.location.href='gate.html'">
-  wait...
+  </div>
 </div>
+
+<div id="revealCover" class="reveal-cover">
+  <div class="reveal-text">fine, come in 😭</div>
+</div>
+
+<script>
+/*
+  PASSWORD RULE:
+  Accepts soul, soull, soulll, soullll, etc.
+  Meaning: "sou" + spammed Ls
+*/
+const nextPage = "main.html";
+
+const input = document.getElementById("passwordInput");
+const statusText = document.getElementById("status");
+const gateCard = document.getElementById("gateCard");
+const progress = document.getElementById("progress");
+const revealCover = document.getElementById("revealCover");
+const unlockBtn = document.getElementById("unlockBtn");
+const hintBox = document.getElementById("hintBox");
+
+const hintText =
+  "WHAT DO WE SEEM TO SHARE ACCORDING TO US EVEN BEFORE WE WERE BORN? LAST LETTER OF PASSWORD SHOULD BE SPAMMED TILL THE WORD REACHES A PERFECT LENGTH YOU KNOWWWW";
+
+const wrongMessages = [
+  "wrong. suspicious behavior detected 😭",
+  "nope. try thinking like us.",
+  "not that. you are overthinking it.",
+  "wrong password but nice attempt ngl.",
+  "access denied. soul logic required.",
+  "nahhh leave it. or maybe try again."
+];
+
+let wrongCount = 0;
+let isChecking = false;
+
+input.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    checkPassword();
+  }
+});
+
+function normalizePassword(value) {
+  return value.trim().toLowerCase();
+}
+
+function isCorrectPassword(value) {
+  /*
+    This accepts:
+    soul
+    soull
+    soulll
+    soullll
+    etc.
+  */
+  return /^soul+$/.test(value);
+}
+
+function checkPassword() {
+  if (isChecking) return;
+
+  const typedPassword = normalizePassword(input.value);
+
+  if (!typedPassword) {
+    showError("at least type something 😭");
+    return;
+  }
+
+  isChecking = true;
+  unlockBtn.disabled = true;
+  unlockBtn.textContent = "checking...";
+  statusText.className = "status";
+  statusText.textContent = "checking...";
+
+  setTimeout(() => {
+    if (isCorrectPassword(typedPassword)) {
+      statusText.textContent = "wait you actually know it?";
+      
+      setTimeout(() => {
+        unlockSuccess();
+      }, 750);
+    } else {
+      wrongPassword();
+    }
+  }, 650);
+}
+
+function unlockSuccess() {
+  statusText.className = "status success";
+  statusText.textContent = "fine. come in 😭";
+
+  progress.classList.add("show");
+  progress.classList.add("run");
+
+  document.body.classList.add("unlocking");
+
+  setTimeout(() => {
+    revealCover.classList.add("show");
+  }, 900);
+
+  setTimeout(() => {
+    window.location.href = nextPage;
+  }, 2200);
+}
+
+function wrongPassword() {
+  wrongCount++;
+
+  const message = wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
+  showError(message);
+
+  if (wrongCount === 3) {
+    hintBox.classList.add("show");
+    hintBox.textContent = hintText;
+  }
+
+  isChecking = false;
+  unlockBtn.disabled = false;
+  unlockBtn.textContent = "enter";
+  input.select();
+}
+
+function showError(message) {
+  statusText.className = "status error";
+  statusText.textContent = message;
+
+  gateCard.classList.remove("shake");
+  void gateCard.offsetWidth;
+  gateCard.classList.add("shake");
+}
+
+function showHint() {
+  hintBox.classList.toggle("show");
+  hintBox.textContent = hintText;
+}
+</script>
 
 </body>
 </html>
