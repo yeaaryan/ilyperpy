@@ -1635,7 +1635,7 @@ AND TRUST ME I CAN AND WILL DO THIS🩵
       <p>tap the envelope.</p>
 
       <div class="envelope-wrap">
-        <div id="envelope" class="envelope" onclick="openLetter()"trackLetterOpen();>
+        <div id="envelope" class="envelope" onclick="openLetter()">
           <div class="envelope-label">tap to open</div>
 
           <div class="letter">
@@ -2032,14 +2032,16 @@ async function trackSongPlay(title, artist) {
     
 
     /* LETTER */
-    function openLetter() {
-      document.getElementById("envelope").classList.add("open");
-    }
+function openLetter() {
+  document.getElementById("envelope").classList.add("open");
 
-    /* WHATSAPP BUTTON TRACKING */
+  trackLetterOpen();
+}
+
+/* WHATSAPP TRACKING */
 async function trackWhatsappClick() {
   try {
-    await fetch(TELEGRAM_URL, {
+    await fetch("/.netlify/functions/miss-me", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -2052,10 +2054,11 @@ async function trackWhatsappClick() {
     console.log("whatsapp tracking failed");
   }
 }
-/* LETTER OPEN TRACKING */
+
+/* LETTER TRACKING */
 async function trackLetterOpen() {
   try {
-    await fetch(TELEGRAM_URL, {
+    await fetch("/.netlify/functions/miss-me", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
