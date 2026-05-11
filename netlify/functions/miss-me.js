@@ -27,14 +27,34 @@ exports.handler = async function(event) {
     hour12: true
   });
 
-  const message =
-`😭 She pressed the button.
+const body = JSON.parse(event.body || "{}");
+const action = body.action;
+
+let message = `😭 She pressed the button.
 
 "press this when you miss me and want to talk"
 
 Time: ${time}
 
 Maybe she wants to talk. Don’t overthink it.`;
+
+if (action === "whatsapp_button_clicked") {
+  message =
+`💚 She pressed the WhatsApp button.
+
+Time: ${time}
+
+maybe she wants to contact you.`;
+}
+
+if (action === "letter_opened") {
+  message =
+`💌 She opened the letter.
+
+Time: ${time}
+
+she is reading your words rn.`;
+}
 
   try {
     const telegramResponse = await fetch(
