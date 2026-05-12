@@ -1411,7 +1411,7 @@ footer,
 <section id="randomThingSection">
   <div class="container fade">
     <div class="center">
-      <span class="eyebrow">WhatShouldIWriteHereTwinnn???</span>
+      <span class="eyebrow">HOLYYYYYY YAPPPP I DID DAWGGGGG</span>
       <h2 id="randomThingTitle">Wednesday Update</h2>
       <p class="hero-line" id="randomThingSubtitle">
         I would maybe update this every Wednesday😝 
@@ -1426,11 +1426,25 @@ footer,
       <div class="giant-bow">🎀</div>
 
       <div class="gift-center-text">
-        TOUCH GENTLY THOU😣
+        OPEN ONLY IF YOU ARE FREEEEE😭
       </div>
 
       <div id="randomGiftReveal" class="random-gift-reveal">
-        <div id="randomThingContent"></div>
+        <div id="randomThingContent">
+
+  <div class="memory-sequence">
+
+    <img src="images/memory1.jpg" class="memory-photo">
+    <img src="images/memory2.jpg" class="memory-photo">
+    <img src="images/memory3.jpg" class="memory-photo">
+    <img src="images/memory4.jpg" class="memory-photo">
+    <img src="images/memory5.jpg" class="memory-photo">
+    <img src="images/memory6.jpg" class="memory-photo">
+    <img src="images/memory7.jpg" class="memory-photo">
+
+  </div>
+
+</div>
       </div>
     </div>
   </div>
@@ -2236,12 +2250,22 @@ window.addEventListener("resize", createSoftDoodles);
 */
 
 const randomThing = {
-  type: "image",
+  type: "gallery",
+
   title: "Wednesday Update",
-  subtitle: "I would maybe update this every Wednesday OR  idkk YOU WOULD GET THE SIGNAL TELEPATHICALLYYYY!!!!!.",
-  text: "I told you to hide my IMM GAY TAGGG CUUUTIEEE 😭",
-  image: "images/roblox-memory-1.png",
-  video: ""
+
+  subtitle:
+  "I FORGOT TO ASK BUT TELL ME IF YOU WANT SOMETHING ADDED INTO THE WEBSITE ANYTIME TWINNN",
+
+  images: [
+    "images/memory1.jpg",
+    "images/memory2.jpg",
+    "images/memory3.jpg",
+    "images/memory4.jpg",
+    "images/memory5.jpg",
+    "images/memory6.jpg",
+    "images/memory7.jpg"
+  ]
 };
 
 function loadRandomThing() {
@@ -2282,6 +2306,29 @@ function loadRandomThing() {
     `;
     return;
   }
+  if (randomThing.type === "text") {
+  content.innerHTML = `
+    <div class="random-thing-text">${randomThing.text || "nothing here yet 😭"}</div>
+  `;
+  return;
+}
+
+if (randomThing.type === "gallery") {
+
+  content.innerHTML = `
+
+    <div class="memory-sequence">
+
+      ${randomThing.images.map(img => `
+        <img src="${img}" class="memory-photo">
+      `).join("")}
+
+    </div>
+
+  `;
+
+  return;
+}
 
   content.innerHTML = `
     <div class="random-thing-empty">
