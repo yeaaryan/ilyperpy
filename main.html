@@ -414,9 +414,9 @@ footer,
     .top-nav a {
       text-decoration: none;
       color: #5d5d75;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
-      padding: 10px 13px;
+      padding: 10px 11px;
       border-radius: 999px;
       transition: .25s ease;
     }
@@ -611,7 +611,7 @@ footer,
     }
 
     .hero-card::after {
-      content: "blue + pink = whatever this is";
+      content: "blue + pink = purpleeee!!!!!!!";
       position: absolute;
       right: 22px;
       bottom: 22px;
@@ -1324,21 +1324,86 @@ footer,
     transform: translateY(-2px);
     background: rgba(255,255,255,0.75);
 }
+/* FOREVER MEMORY */
+
+.forever-memory-card{
+
+  width:100%;
+
+  max-width:1100px;
+
+  margin:40px auto 0 auto;
+
+  background:
+  rgba(255,255,255,0.14);
+
+  backdrop-filter:
+  blur(18px);
+
+  border:
+  1px solid rgba(255,255,255,0.3);
+
+  border-radius:42px;
+
+  overflow:hidden;
+
+  box-shadow:
+  0 25px 60px rgba(0,0,0,0.08);
+}
+
+.forever-memory-photo{
+
+  width:100%;
+
+  display:block;
+
+  object-fit:cover;
+}
+
+.forever-memory-bottom-text{
+
+  padding:
+  26px 30px 30px 30px;
+
+  text-align:center;
+
+  font-size:17px;
+
+  color:#666;
+
+  line-height:1.7;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .forever-memory-card{
+    border-radius:30px;
+  }
+
+  .forever-memory-bottom-text{
+
+    font-size:15px;
+
+    padding:
+    22px 18px 26px 18px;
+  }
+
+}
   </style>
 </head>
 
 <body>
 
-  <nav class="top-nav">
-    <a href="#top">Ussss</a>
-    <a href="#hints">Hints</a>
-    <a href="#chat">Chat</a>
-    <a href="#songsSection">Songs</a>
-    <a href="#miss">Signal</a>
-    <a href="#letterSection">Letter</a>
-  </nav>
-  <nav class="top-nav">
-  ...
+<nav class="top-nav">
+  <a href="#top">Ussss</a>
+  <a href="#hints">Hints</a>
+  <a href="#chat">Chat</a>
+  <a href="#songsSection">Songs</a>
+  <a href="#randomThingSection">Wednesday</a>
+  <a href="#miss">Signal</a>
+  <a href="#letterSection">Letter</a>
 </nav>
 
 <a href="https://wa.me/918627882031"
@@ -1407,6 +1472,46 @@ footer,
       </div>
     </div>
   </section>
+
+ <!-- FOREVER MEMORY -->
+<section id="foreverMemorySection">
+
+  <div class="container fade">
+
+    <div class="center">
+
+      <span class="eyebrow">
+        Bhondu ahh face right there.
+      </span>
+
+      <h2>
+        WE ARE GONNA BE POSTED UP LIKE THIS IRL SOON TOO I SWEAR.
+      </h2>
+
+      <p class="hero-line">
+        I am gonna get that tag tatted on my neck to repel other girls when I am with youuuuh😝!!!!
+      </p>
+
+    </div>
+
+    <div class="forever-memory-card">
+
+      <img
+        src="images/permanent-memory.jpg"
+        class="forever-memory-photo"
+      >
+
+      <div class="forever-memory-bottom-text">
+        WhatElseDoYouWantBabygirl??!!!!
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</section>
 <!-- RANDOM THING SECTION -->
 <section id="randomThingSection">
   <div class="container fade">
@@ -1699,7 +1804,7 @@ Aryan
   </section>
 
   <footer>
-    blue for me, pink for you, and whatever this is for both of us
+    blue for me, pink for you, and PURPLEEEE!!!!!! this is for both of us
   </footer>
 
   <script>
