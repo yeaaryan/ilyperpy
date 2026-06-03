@@ -192,8 +192,13 @@
 .random-thing-media video {
   width: 100%;
   max-height: 560px;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+}
+.memory-photo{
+  width:100%;
+  height:auto;
+  display:block;
 }
 
 .random-thing-text {
@@ -1516,7 +1521,7 @@ footer,
 <section id="randomThingSection">
   <div class="container fade">
     <div class="center">
-      <span class="eyebrow">I AM SORRYY BUT NO BIG UPDATE THIS TIME, LOW ON CREDITS YK</span>
+      <span class="eyebrow"> F A - fvkinn awwsome (It's a Carti reference)</span>
       <h2 id="randomThingTitle">Wednesday Update</h2>
       <p class="hero-line" id="randomThingSubtitle">
         I would maybe update this every Wednesday😝 
@@ -1531,7 +1536,7 @@ footer,
       <div class="giant-bow">🎀</div>
 
       <div class="gift-center-text">
-        NOT UPDATED BUT JUST KNOW I LOVE YOUUU 
+        NOTHING MUCHHH BUT UPDATEDDD!!!!!
       </div>
 
       <div id="randomGiftReveal" class="random-gift-reveal">
@@ -2242,7 +2247,7 @@ async function trackLetterOpen() {
           }
         } catch (error) {
           missMeButton.textContent = "try again";
-          missMeStatus.textContent = "this will work after deploying on Netlify.";
+          missMeStatus.textContent = "something broke, tell Aryan to fix it 😭";
           missMeCooldown = false;
           missMeButton.disabled = false;
         }
@@ -2345,7 +2350,7 @@ const randomThing = {
 
   title: "Wednesday Update",
 
-  subtitle: "STOP, I CAN'T LET GO. YOU REALLY GOT MY SOUL UNTOLD😣 (I didn't know what to write)",
+  subtitle: "Bhookh lag rahi hai yaaar",
 
   newLetter: `
 Meow,
@@ -2371,7 +2376,10 @@ It's not about me, not about us and it's only about you and your safety.
 Baaki toh I trust you when you said that you are not going to do this and keep going further. Yes, this is my real Twin this is my Perpyyy, Byeeeee.
 Mwahhh♥️
   `,
-
+topImages: [
+  "images/roblox1.jpg",
+  "images/roblox2.jpg"
+],
   images: [
     "images/memory1.jpg",
     "images/memory2.jpg",
@@ -2397,6 +2405,8 @@ function loadRandomThing() {
 
   if (randomThing.type === "image" && randomThing.image) {
     content.innerHTML = `
+    <!-- NEW TOP IMAGES -->
+
       <div class="random-thing-media">
         <img src="${randomThing.image}" alt="random memory">
       </div>
@@ -2431,6 +2441,17 @@ function loadRandomThing() {
 if (randomThing.type === "wednesday_letters") {
 
   content.innerHTML = `
+
+      <!-- NEW TOP IMAGES -->
+    <div class="memory-sequence">
+      <img src="images/roblox1.jpg" class="memory-photo">
+      <img src="images/roblox2.jpg" class="memory-photo">
+      <div class="center" style="margin: 28px 0;">
+  <span class="eyebrow">
+    Then you said "Absolute sub activitiess" lmaeowwww ,forgot to capture that in the screenshot😭😭    
+  </span>
+</div>
+    </div>
 
     <!-- NEW LETTER FIRST -->
     <div class="random-thing-text">
