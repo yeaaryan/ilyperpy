@@ -2501,6 +2501,11 @@ function openRandomGift() {
   if (box.classList.contains("opened")) return;
 
   box.classList.add("opened");
+  // 🔔 TELEGRAM ALERT
+  fetch("/.netlify/functions/telegram-open", {
+    method: "POST"
+  }).catch(() => {});
+
 
   setTimeout(() => {
     reveal.classList.add("show");
