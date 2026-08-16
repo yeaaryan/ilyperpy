@@ -248,6 +248,58 @@
     top: 28px;
   }
 }
+/* =========================
+   MINECRAFT MEMORIES
+   ========================= */
+
+.minecraft-memory-card {
+  width: 100%;
+  margin-top: 34px;
+  padding: clamp(20px, 4vw, 34px);
+  border-radius: 34px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.9);
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 24px 70px rgba(120,150,200,.16),
+    inset 0 0 0 1px rgba(255,255,255,.35);
+}
+
+.minecraft-memory {
+  width: 100%;
+}
+
+.minecraft-memory + .minecraft-memory {
+  margin-top: 34px;
+  padding-top: 34px;
+  border-top: 1px solid rgba(255,255,255,.7);
+}
+
+.minecraft-memory-media {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #dff3ff, #ffe1ef);
+  border: 1px solid rgba(255,255,255,.9);
+  box-shadow: 0 18px 50px rgba(120,110,170,.14);
+}
+
+.minecraft-memory-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 650px) {
+  .minecraft-memory-card {
+    padding: 18px;
+    border-radius: 28px;
+  }
+
+  .minecraft-memory-media {
+    border-radius: 22px;
+  }
+}
     * {
       margin: 0;
       padding: 0;
@@ -1332,11 +1384,8 @@ footer,
 /* FOREVER MEMORY */
 
 .forever-memory-card{
-
   width:100%;
-
   max-width:1100px;
-
   margin:40px auto 0 auto;
 
   background:
@@ -1357,16 +1406,12 @@ footer,
 }
 
 .forever-memory-photo{
-
   width:100%;
-
   display:block;
-
   object-fit:cover;
 }
 
 .forever-memory-bottom-text{
-
   padding:
   26px 30px 30px 30px;
 
@@ -1379,6 +1424,79 @@ footer,
   line-height:1.7;
 }
 
+
+/* =========================
+   MINECRAFT MEMORIES
+========================= */
+
+.minecraft-memory-card{
+  width:100%;
+  max-width:1100px;
+
+  margin:40px auto 0 auto;
+
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:22px;
+}
+
+.minecraft-memory{
+  position:relative;
+
+  background:
+  rgba(255,255,255,0.14);
+
+  backdrop-filter:
+  blur(18px);
+
+  border:
+  1px solid rgba(255,255,255,0.3);
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,0.08);
+
+  transition:
+  transform 0.35s ease,
+  box-shadow 0.35s ease;
+}
+
+.minecraft-memory:hover{
+  transform:
+  translateY(-6px)
+  scale(1.01);
+
+  box-shadow:
+  0 28px 65px rgba(0,0,0,0.12);
+}
+
+.minecraft-memory-media{
+  width:100%;
+  aspect-ratio:16 / 10;
+  overflow:hidden;
+}
+
+.minecraft-memory-media img{
+  width:100%;
+  height:100%;
+
+  display:block;
+
+  object-fit:cover;
+
+  transition:
+  transform 0.5s ease;
+}
+
+.minecraft-memory:hover
+.minecraft-memory-media img{
+  transform:scale(1.04);
+}
+
+
 /* MOBILE */
 
 @media(max-width:768px){
@@ -1388,21 +1506,1192 @@ footer,
   }
 
   .forever-memory-bottom-text{
-
     font-size:15px;
 
     padding:
     22px 18px 26px 18px;
   }
 
+  .minecraft-memory-card{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .minecraft-memory{
+    border-radius:24px;
+  }
+
 }
-  </style>
+/* =========================================================
+   BIG MINECRAFT GIFT BOX
+   ========================================================= */
+
+.minecraft-big-gift {
+
+  position: relative;
+
+  width: 440px;
+  height: 430px;
+
+  margin: 70px auto 50px auto;
+
+  cursor: pointer;
+
+  perspective: 1000px;
+
+  transition:
+    transform 0.3s ease;
+
+  filter:
+    drop-shadow(
+      0 30px 35px
+      rgba(0,0,0,0.13)
+    );
+}
+
+
+/* LITTLE HOVER */
+
+.minecraft-big-gift:not(.opened):hover {
+
+  transform:
+    translateY(-8px)
+    rotate(-1deg);
+}
+
+
+/* =========================================================
+   GIFT BODY
+   ========================================================= */
+
+.minecraft-gift-body {
+
+  position: absolute;
+
+  width: 360px;
+  height: 250px;
+
+  left: 40px;
+  bottom: 45px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #65b8ff,
+      #4198f0
+    );
+
+  border:
+    2px solid
+    rgba(255,255,255,0.45);
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(255,255,255,0.15),
+
+    0 20px 35px
+    rgba(0,0,0,0.13);
+
+  overflow: hidden;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   BODY RIBBON
+   ========================================================= */
+
+.minecraft-gift-ribbon {
+
+  position: absolute;
+
+  width: 58px;
+  height: 100%;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.18),
+      rgba(255,255,255,0.55),
+      rgba(255,255,255,0.18)
+    );
+
+  box-shadow:
+    0 0 15px
+    rgba(255,255,255,0.12);
+}
+
+
+/* =========================================================
+   LID
+   ========================================================= */
+
+.minecraft-gift-lid {
+
+  position: absolute;
+
+  width: 400px;
+  height: 78px;
+
+  left: 20px;
+  top: 62px;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff9bc8,
+      #ff69ae
+    );
+
+  border:
+    2px solid
+    rgba(255,255,255,0.55);
+
+  box-shadow:
+
+    0 12px 20px
+    rgba(0,0,0,0.15),
+
+    inset 0 1px 0
+    rgba(255,255,255,0.35);
+
+  z-index: 10;
+
+  transform-origin:
+    center bottom;
+
+  transition:
+    transform 0.9s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* =========================================================
+   LID RIBBON
+   ========================================================= */
+
+.minecraft-gift-ribbon-lid {
+
+  position: absolute;
+
+  width: 58px;
+  height: 100%;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.15),
+      rgba(255,255,255,0.58),
+      rgba(255,255,255,0.15)
+    );
+}
+
+
+/* =========================================================
+   BOW
+   ========================================================= */
+
+.minecraft-gift-bow {
+
+  position: absolute;
+
+  left: 50%;
+  top: -76px;
+
+  width: 150px;
+  height: 110px;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 15;
+
+  transition:
+    transform 0.9s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* LEFT LOOP */
+
+.minecraft-bow-left {
+
+  position: absolute;
+
+  width: 75px;
+  height: 75px;
+
+  left: 3px;
+  top: 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff75b5,
+      #ffb2d4
+    );
+
+  border-radius:
+    65% 20% 65% 20%;
+
+  transform:
+    rotate(25deg);
+
+  box-shadow:
+    0 5px 10px
+    rgba(0,0,0,0.12);
+}
+
+
+/* RIGHT LOOP */
+
+.minecraft-bow-right {
+
+  position: absolute;
+
+  width: 75px;
+  height: 75px;
+
+  right: 3px;
+  top: 25px;
+
+  background:
+    linear-gradient(
+      225deg,
+      #ff75b5,
+      #ffb2d4
+    );
+
+  border-radius:
+    20% 65% 20% 65%;
+
+  transform:
+    rotate(-25deg);
+
+  box-shadow:
+    0 5px 10px
+    rgba(0,0,0,0.12);
+}
+
+
+/* CENTER */
+
+.minecraft-bow-center {
+
+  position: absolute;
+
+  width: 42px;
+  height: 42px;
+
+  left: 54px;
+  top: 47px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff5eaa,
+      #ff91c5
+    );
+
+  box-shadow:
+    0 5px 12px
+    rgba(0,0,0,0.16);
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   TEXT ON BOX
+   ========================================================= */
+
+.minecraft-gift-message {
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: 92px;
+
+  text-align: center;
+
+  font-size: 23px;
+
+  font-weight: 900;
+
+  color: white;
+
+  text-shadow:
+    0 2px 6px
+    rgba(0,0,0,0.18);
+
+  z-index: 5;
+
+  transition:
+    opacity 0.35s ease;
+}
+
+
+/* =========================================================
+   OPEN ANIMATION
+   ========================================================= */
+
+.minecraft-big-gift.opened .minecraft-gift-lid {
+
+  transform:
+    translateY(-145px)
+    translateX(35px)
+    rotate(10deg);
+}
+
+
+.minecraft-big-gift.opened .minecraft-gift-bow {
+
+  transform:
+    translateX(-50%)
+    translateY(-145px)
+    rotate(10deg);
+}
+
+
+.minecraft-big-gift.opened .minecraft-gift-message {
+
+  opacity: 0;
+}
+
+
+/* =========================================================
+   MEMORIES
+   ========================================================= */
+
+.minecraft-memories-reveal {
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  max-height: 0;
+
+  overflow: hidden;
+
+  transform:
+    translateY(50px)
+    scale(0.96);
+
+  pointer-events: none;
+
+  transition:
+
+    opacity 0.8s ease,
+
+    transform 0.8s ease,
+
+    max-height 1.2s ease,
+
+    visibility 0s linear 1.2s;
+}
+
+
+.minecraft-memories-reveal.show {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  max-height: 15000px;
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  pointer-events: auto;
+
+  transition:
+
+    opacity 0.8s ease,
+
+    transform 0.8s ease,
+
+    max-height 1.2s ease,
+
+    visibility 0s;
+}
+
+
+.minecraft-memory-intro {
+
+  margin:
+    20px 0 35px 0;
+}
+
+
+/* =========================================================
+   MEMORY GRID
+   ========================================================= */
+
+.minecraft-memory-card {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 28px;
+
+  padding:
+    10px 10px 40px 10px;
+}
+
+
+/* MEMORY CARD */
+
+.minecraft-memory {
+
+  background:
+    rgba(255,255,255,0.14);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.3);
+
+  border-radius: 30px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 45px
+    rgba(0,0,0,0.08);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.minecraft-memory:hover {
+
+  transform:
+    translateY(-7px);
+
+  box-shadow:
+    0 28px 55px
+    rgba(0,0,0,0.13);
+}
+
+
+/* IMAGE */
+
+.minecraft-memory-media {
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+
+.minecraft-memory-media img {
+
+  width: 100%;
+
+  height: auto;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.5s ease;
+}
+
+
+.minecraft-memory:hover
+.minecraft-memory-media img {
+
+  transform:
+    scale(1.025);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:768px){
+
+  .minecraft-big-gift {
+
+    width: 350px;
+
+    max-width: 94vw;
+
+    height: 390px;
+
+    margin-top: 50px;
+  }
+
+
+  .minecraft-gift-body {
+
+    width: 290px;
+
+    height: 220px;
+
+    left: 30px;
+
+    bottom: 35px;
+  }
+
+
+  .minecraft-gift-lid {
+
+    width: 320px;
+
+    left: 15px;
+
+    top: 60px;
+  }
+
+
+  .minecraft-gift-ribbon {
+
+    width: 48px;
+  }
+
+
+  .minecraft-gift-ribbon-lid {
+
+    width: 48px;
+  }
+
+
+  .minecraft-gift-message {
+
+    font-size: 19px;
+  }
+
+
+  .minecraft-gift-bow {
+
+    transform:
+      translateX(-50%)
+      scale(0.85);
+  }
+
+
+  .minecraft-big-gift.opened
+  .minecraft-gift-bow {
+
+    transform:
+      translateX(-50%)
+      translateY(-135px)
+      rotate(10deg)
+      scale(0.85);
+  }
+
+
+  .minecraft-big-gift.opened
+  .minecraft-gift-lid {
+
+    transform:
+      translateY(-130px)
+      translateX(25px)
+      rotate(10deg);
+  }
+
+
+  .minecraft-memory-card {
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+
+    padding:
+      5px 5px 30px 5px;
+  }
+
+
+  .minecraft-memory {
+
+    border-radius: 24px;
+  }
+
+}
+/* =========================================================
+   MINECRAFT MEMORY GIFT
+   ========================================================= */
+
+.minecraft-gift-box {
+
+  position: relative;
+
+  width: 100%;
+  max-width: 1000px;
+
+  height: 430px;
+
+  margin: 50px auto 0;
+
+  cursor: pointer;
+
+  perspective: 1000px;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.5s ease;
+}
+
+.minecraft-gift-box:hover {
+  transform: translateY(-6px);
+}
+
+
+/* -------------------------
+   GIFT BODY
+   ------------------------- */
+
+.minecraft-gift-body {
+
+  position: absolute;
+
+  left: 10%;
+  right: 10%;
+
+  bottom: 0;
+
+  height: 70%;
+
+  border-radius: 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6faee8,
+      #8dbce8 45%,
+      #f3a6c9
+    );
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.18);
+
+  overflow: hidden;
+}
+
+
+/* -------------------------
+   GIFT LID
+   ------------------------- */
+
+.minecraft-gift-lid {
+
+  position: absolute;
+
+  z-index: 4;
+
+  left: 7%;
+  right: 7%;
+
+  top: 13%;
+
+  height: 23%;
+
+  border-radius: 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #589fe5,
+      #82b7e9 48%,
+      #f19bc2
+    );
+
+  box-shadow:
+    0 18px 35px rgba(0,0,0,0.16);
+
+  transform-origin: bottom center;
+
+  transition:
+    transform 0.9s cubic-bezier(.2,.8,.2,1),
+    opacity 0.5s ease;
+}
+
+
+/* -------------------------
+   VERTICAL RIBBON
+   ------------------------- */
+
+.minecraft-ribbon-vertical {
+
+  position: absolute;
+
+  z-index: 5;
+
+  left: 50%;
+
+  top: 13%;
+  bottom: 0;
+
+  width: 90px;
+
+  transform: translateX(-50%);
+
+  background:
+    rgba(255,255,255,0.38);
+
+  pointer-events: none;
+}
+
+
+/* -------------------------
+   HORIZONTAL RIBBON
+   ------------------------- */
+
+.minecraft-ribbon-horizontal {
+
+  position: absolute;
+
+  z-index: 6;
+
+  left: 7%;
+  right: 7%;
+
+  top: 24%;
+
+  height: 70px;
+
+  background:
+    rgba(255,255,255,0.32);
+
+  pointer-events: none;
+}
+
+
+/* -------------------------
+   BOW
+   ------------------------- */
+
+.minecraft-bow {
+
+  position: absolute;
+
+  z-index: 10;
+
+  top: 2%;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%)
+    rotate(-5deg);
+
+  font-size: 72px;
+
+  filter:
+    drop-shadow(
+      0 8px 12px rgba(0,0,0,0.12)
+    );
+
+  transition:
+    transform 0.8s ease;
+}
+
+
+/* -------------------------
+   CENTER TEXT
+   ------------------------- */
+
+.minecraft-gift-center-text {
+
+  position: absolute;
+
+  z-index: 8;
+
+  left: 50%;
+  top: 56%;
+
+  transform: translate(-50%, -50%);
+
+  width: 75%;
+
+  text-align: center;
+
+  font-size: clamp(20px, 3vw, 32px);
+
+  font-weight: 900;
+
+  color: white;
+
+  text-shadow:
+    0 3px 12px rgba(0,0,0,0.22);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   OPEN ANIMATION
+   ========================================================= */
+
+.minecraft-gift-box.opened {
+
+  cursor: default;
+
+  transform: translateY(0);
+}
+
+.minecraft-gift-box.opened .minecraft-gift-lid {
+
+  transform:
+    translateY(-180px)
+    rotateX(55deg);
+
+  opacity: 0;
+}
+
+.minecraft-gift-box.opened .minecraft-bow {
+
+  transform:
+    translateX(-50%)
+    translateY(-170px)
+    rotate(12deg);
+
+  opacity: 0;
+}
+
+.minecraft-gift-box.opened .minecraft-gift-center-text {
+
+  opacity: 0;
+
+  transition:
+    opacity 0.35s ease;
+}
+
+
+/* =========================================================
+   MEMORIES
+   ========================================================= */
+
+.minecraft-memories-reveal {
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  opacity: 0;
+
+  max-height: 0;
+
+  overflow: hidden;
+
+  transform:
+    translateY(40px)
+    scale(0.97);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease,
+    max-height 1.2s ease;
+
+}
+
+
+.minecraft-memories-reveal.show {
+
+  opacity: 1;
+
+  max-height: 10000px;
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  margin-top: 55px;
+}
+
+
+/* MEMORY GRID */
+
+.minecraft-memory-card {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+
+  padding: 10px;
+}
+
+
+.minecraft-memory {
+
+  background:
+    rgba(255,255,255,0.18);
+
+  backdrop-filter:
+    blur(16px);
+
+  border:
+    1px solid rgba(255,255,255,0.3);
+
+  border-radius: 30px;
+
+  padding: 12px;
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.08);
+
+  transition:
+    transform 0.3s ease;
+}
+
+.minecraft-memory:hover {
+
+  transform:
+    translateY(-5px)
+    rotate(0deg);
+}
+
+
+.minecraft-memory-media {
+
+  width: 100%;
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  background: rgba(255,255,255,0.2);
+}
+
+
+.minecraft-memory-media img {
+
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:768px) {
+
+  .minecraft-gift-box {
+
+    height: 330px;
+
+    margin-top: 35px;
+  }
+
+  .minecraft-gift-lid {
+
+    top: 15%;
+
+    height: 22%;
+  }
+
+  .minecraft-gift-body {
+
+    left: 6%;
+    right: 6%;
+
+    height: 68%;
+
+    border-radius: 20px;
+  }
+
+  .minecraft-ribbon-vertical {
+
+    width: 55px;
+  }
+
+  .minecraft-ribbon-horizontal {
+
+    left: 6%;
+    right: 6%;
+
+    height: 48px;
+  }
+
+  .minecraft-bow {
+
+    font-size: 52px;
+
+    top: 4%;
+  }
+
+  .minecraft-gift-center-text {
+
+    font-size: 21px;
+
+    width: 80%;
+  }
+
+  .minecraft-gift-box.opened
+  .minecraft-gift-lid {
+
+    transform:
+      translateY(-130px)
+      rotateX(50deg);
+  }
+
+  .minecraft-gift-box.opened
+  .minecraft-bow {
+
+    transform:
+      translateX(-50%)
+      translateY(-125px)
+      rotate(12deg);
+  }
+
+  .minecraft-memory-card {
+
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    padding: 5px;
+  }
+
+  .minecraft-memory {
+
+    border-radius: 24px;
+
+    padding: 9px;
+  }
+
+  .minecraft-memory-media {
+
+    border-radius: 18px;
+  }
+
+}
+/* MINECRAFT MEMORIES HIDDEN UNTIL GIFT IS OPENED */
+
+.minecraft-memory-hidden {
+  display: none;
+  width: 100%;
+  margin-top: 45px;
+}
+
+.minecraft-memory-hidden.show {
+  display: block;
+}
+/* Remove the Minecraft gift container completely after opening */
+
+#minecraftGiftBox.opened {
+  display: none !important;
+}
+.minecraft-memory-hidden {
+  display: none;
+  width: 100%;
+  margin-top: 45px;
+}
+
+.minecraft-memory-hidden.show {
+  display: block;
+  animation: minecraftReveal 0.6s ease;
+}
+
+@keyframes minecraftReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* CENTER THE FIRST MINECRAFT MEMORY */
+
+/* FIRST MINECRAFT MEMORY — KEEP IMAGE + CAPTION VERTICAL */
+
+.minecraft-memory:first-child {
+  display: block !important;
+  text-align: center;
+}
+
+.minecraft-memory:first-child .minecraft-memory-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.minecraft-memory:first-child .minecraft-memory-media img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.minecraft-memory:first-child .minecraft-memory-caption {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 14px;
+}
+/* ALIGN MINECRAFT MEMORY 1 WITH MEMORY 2 */
+
+.minecraft-memory:first-child .minecraft-memory-media {
+  transform: translateY(16px);
+}
+
+.minecraft-memory:first-child .minecraft-memory-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minecraft-memory:first-child img {
+  display: block;
+  margin: 0 auto;
+}
+</style>
 </head>
 
 <body>
 
 <nav class="top-nav">
   <a href="#top">Ussss</a>
+  <a href="#minecraftMemoriesSection">Minecraft</a>
   <a href="#hints">Hints</a>
   <a href="#chat">Chat</a>
   <a href="#songsSection">Songs</a>
@@ -1418,67 +2707,119 @@ footer,
    📞ANYTIME TWIN, ANYTIMEEEE!!!!!!!!
 </a>
 
-  <canvas id="bg"></canvas>
-  <div class="blob blue"></div>
-  <div class="blob pink"></div>
-  <div class="blob purple"></div>
-  <!-- FLOATING WORDS + DOODLES -->
+<canvas id="bg"></canvas>
+
+<div class="blob blue"></div>
+<div class="blob pink"></div>
+<div class="blob purple"></div>
+
+<!-- FLOATING WORDS + DOODLES -->
 <div id="softDoodles" class="soft-doodles"></div>
 
-  <!-- ONE REAL PLAYER: this never moves in HTML, so YouTube does not restart -->
-  <div id="globalMusicPlayer" class="global-music-player">
-    <div id="songPlayerCard" class="song-player-card">
-      <iframe
-        id="youtubePlayer"
-        class="youtube-frame"
-        src="https://www.youtube-nocookie.com/embed/F30Pb7NSieE?rel=0"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen>
-      </iframe>
 
-      <div id="nowPlaying" class="now-playing">
-        Now playing: Pink Bubblegum — Lavi
-      </div>
+<!-- ONE REAL PLAYER: this never moves in HTML, so YouTube does not restart -->
+
+<div id="globalMusicPlayer" class="global-music-player">
+
+  <div id="songPlayerCard" class="song-player-card">
+
+    <iframe
+      id="youtubePlayer"
+      class="youtube-frame"
+      src="https://www.youtube-nocookie.com/embed/F30Pb7NSieE?rel=0"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+
+    <div id="nowPlaying" class="now-playing">
+      Now playing: Pink Bubblegum — Lavi
     </div>
+
   </div>
 
-  <!-- SECTION 1 -->
-  <section id="top">
-    <div class="container center fade glass hero-card">
-      <span class="eyebrow">Blue is me and Pink is you.</span>
-      <h1>Usssss</h1>
+</div>
 
-      <p class="hero-line">
-        U is me because I'm taller and s is you because you are shorter twin😭,
-        but please never sybau🩵
-      </p>
 
-      <div class="photo-grid">
-        <div class="photo-card" style="--rotate:-2deg;">
-          <img src="images/us-1.jpg" alt="us photo 1" onerror="this.style.display='none'; this.parentElement.classList.add('empty');">
-          <div class="photo-caption">I see us in them</div>
-        </div>
+<!-- SECTION 1 -->
 
-        <div class="photo-card" style="--rotate:1.5deg;">
-          <img src="images/us-2.jpg" alt="us photo 2" onerror="this.style.display='none'; this.parentElement.classList.add('empty');">
-          <div class="photo-caption">same chaotic energy</div>
-        </div>
+<section id="top">
 
-        <div class="photo-card" style="--rotate:-1deg;">
-          <img src="images/us-3.jpg" alt="us photo 3" onerror="this.style.display='none'; this.parentElement.classList.add('empty');">
-          <div class="photo-caption">friends but suspicious</div>
-        </div>
+  <div class="container center fade glass hero-card">
 
-        <div class="photo-card" style="--rotate:2deg;">
-          <img src="images/us-4.jpg" alt="us photo 4" onerror="this.style.display='none'; this.parentElement.classList.add('empty');">
-          <div class="photo-caption">not normal but works</div>
+    <span class="eyebrow">
+      Blue is me and Pink is you.
+    </span>
+
+    <h1>Usssss</h1>
+
+    <p class="hero-line">
+      U is me because I'm taller and s is you because you are shorter twin😭,
+      but please never sybau🩵
+    </p>
+
+    <div class="photo-grid">
+
+      <div class="photo-card" style="--rotate:-2deg;">
+        <img
+          src="images/us-1.jpg"
+          alt="us photo 1"
+          onerror="this.style.display='none'; this.parentElement.classList.add('empty');"
+        >
+
+        <div class="photo-caption">
+          I see us in them
         </div>
       </div>
-    </div>
-  </section>
 
- <!-- FOREVER MEMORY -->
+
+      <div class="photo-card" style="--rotate:1.5deg;">
+        <img
+          src="images/us-2.jpg"
+          alt="us photo 2"
+          onerror="this.style.display='none'; this.parentElement.classList.add('empty');"
+        >
+
+        <div class="photo-caption">
+          same chaotic energy
+        </div>
+      </div>
+
+
+      <div class="photo-card" style="--rotate:-1deg;">
+        <img
+          src="images/us-3.jpg"
+          alt="us photo 3"
+          onerror="this.style.display='none'; this.parentElement.classList.add('empty');"
+        >
+
+        <div class="photo-caption">
+          friends but suspicious
+        </div>
+      </div>
+
+
+      <div class="photo-card" style="--rotate:2deg;">
+        <img
+          src="images/us-4.jpg"
+          alt="us photo 4"
+          onerror="this.style.display='none'; this.parentElement.classList.add('empty');"
+        >
+
+        <div class="photo-caption">
+          not normal but works
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOREVER MEMORY -->
+
 <section id="foreverMemorySection">
 
   <div class="container fade">
@@ -1499,6 +2840,7 @@ footer,
 
     </div>
 
+
     <div class="forever-memory-card">
 
       <img
@@ -1516,19 +2858,371 @@ footer,
 
 </section>
 
-</section>
-<!-- RANDOM THING SECTION -->
-<section id="randomThingSection">
+<!-- MINECRAFT MEMORIES -->
+<section id="minecraftMemoriesSection">
+
   <div class="container fade">
+
     <div class="center">
-      <span class="eyebrow">❤️‍🩹❤️‍🩹❤️‍🩹❤️‍🩹❤️‍🩹❤️‍🩹❤️‍🩹</span>
-      <h2 id="randomThingTitle">Wednesday Update</h2>
-      <p class="hero-line" id="randomThingSubtitle">
-        I would maybe update this every Wednesday😝 
+
+      <span class="eyebrow">
+        CUTEEEEEEEEEE>>>>>>>>>
+      </span>
+
+      <h2>Minecraft Memories</h2>
+
+      <p class="hero-line">
+        DONE PUTTING ME ONTO SUM ABSOLUTE PEAK⛏️🩵🩷
       </p>
+
     </div>
 
-    <div id="randomThingBox" class="random-thing-card giant-gift" onclick="openRandomGift()">
+
+    <!-- MINECRAFT GIFT BOX -->
+    <div
+      id="minecraftGiftBox"
+      class="random-thing-card giant-gift"
+      onclick="openMinecraftGift()"
+    >
+
+      <div class="giant-gift-lid"></div>
+
+      <div class="giant-gift-body"></div>
+
+      <div class="giant-ribbon-vertical"></div>
+
+      <div class="giant-ribbon-horizontal"></div>
+
+      <div class="giant-bow">🎀</div>
+
+      <div class="gift-center-text">
+           DO NOT TOUCH THISSSS😥😥 
+           (please do)
+      </div>
+
+    </div>
+
+
+    <!-- MINECRAFT MEMORIES -->
+    <div
+      id="minecraftMemoryReveal"
+      class="minecraft-memory-hidden"
+    >
+
+      <div class="minecraft-memory-card">
+
+
+        <!-- MEMORY 1 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft1.jpg"
+              alt="Minecraft memory 1"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            🩵🩷  (this photo lil bit higher than all because we FLYY ASFF TWINNN!!!!)
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 2 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft2.jpg"
+              alt="Minecraft memory 2"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            Two chests talll❤️‍🩹
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 3 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft3.jpg"
+              alt="Minecraft memory 3"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+             Two chests SHORTTT!!!❤️‍🩹
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 4 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft4.jpg"
+              alt="Minecraft memory 4"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+           This isss sooo cuteee🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 5 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft5.jpg"
+              alt="Minecraft memory 5"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+             🩵🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 6 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft6.jpg"
+              alt="Minecraft memory 6"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            🩵🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 7 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft7.jpg"
+              alt="Minecraft memory 7"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+           🩵🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 8 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft8.jpg"
+              alt="Minecraft memory 8"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            🩵🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 9 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft9.jpg"
+              alt="Minecraft memory 9"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            Look at my partner dawggg, We ain't beating no dragon💔
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 10 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft10.jpg"
+              alt="Minecraft memory 10"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            Birthdayy partyyyy ❤️‍🩹❤️‍🩹
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 11 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft11.jpg"
+              alt="Minecraft memory 11"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            🩵🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 12 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft12.jpg"
+              alt="Minecraft memory 12"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            Thiss my favourite thing in our world🩵🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 13 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft13.jpg"
+              alt="Minecraft memory 13"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            🩵🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 14 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft14.jpg"
+              alt="Minecraft memory 14"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            THIS TOOO 🩵🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 15 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft15.jpg"
+              alt="Minecraft memory 15"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            AND PROLLYY THIS TOOOOOOOOdsjdjdbdhjbdhjb🩵🩷
+          </div>
+
+        </div>
+
+
+        <!-- MEMORY 16 -->
+        <div class="minecraft-memory">
+
+          <div class="minecraft-memory-media">
+            <img
+              src="images/minecraft16.jpg"
+              alt="Minecraft memory 16"
+            >
+          </div>
+
+          <div class="minecraft-memory-caption">
+            🩵🩷
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- WEDNESDAY UPDATE -->
+
+<section id="randomThingSection">
+
+  <div class="container fade">
+
+    <div class="center">
+
+      <span class="eyebrow">
+        ❤️‍🩹❤️‍🩹❤️‍🩹❤️‍🩹❤️‍🩹❤️‍🩹❤️‍🩹
+      </span>
+
+      <h2 id="randomThingTitle">
+        Wednesday Update
+      </h2>
+
+      <p
+        class="hero-line"
+        id="randomThingSubtitle"
+      >
+        I would maybe update this every Wednesday😝
+      </p>
+
+    </div>
+
+
+    <div
+      id="randomThingBox"
+      class="random-thing-card giant-gift"
+      onclick="openRandomGift()"
+    >
+
       <div class="giant-gift-lid"></div>
       <div class="giant-gift-body"></div>
       <div class="giant-ribbon-vertical"></div>
@@ -1539,730 +3233,1405 @@ footer,
         NOTHING MUCHHH BUT UPDATEDDD!!!!!
       </div>
 
-      <div id="randomGiftReveal" class="random-gift-reveal">
-<div id="randomThingContent"></div>
+      <div
+        id="randomGiftReveal"
+        class="random-gift-reveal"
+      >
+
+        <div id="randomThingContent"></div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
-  <!-- SECTION 2 -->
-  <section id="hints">
-    <div class="container glass fade">
-      <span class="eyebrow">Things you already knewww</span>
-      <h2>I know you understand everything and still stay silent.❤️‍🩹</h2>
+
+
+<!-- SECTION 2 -->
+
+<section id="hints">
+
+  <div class="container glass fade">
+
+    <span class="eyebrow">
+      Things you already knewww
+    </span>
+
+    <h2>
+      I know you understand everything and still stay silent.❤️‍🩹
+    </h2>
+
+    <p>
+      These are some of the hints that I have been dropping all along😭😭.
+    </p>
+
+    <div class="hint-list">
+
+      <div class="hint-card">
+        1. Me sneaking in "I love You"s in between the texts😭
+      </div>
+
+      <div class="hint-card">
+        2. Me saying "lambo has only two seats" trying to soft launch me being able to see a future with you😭.
+      </div>
+
+      <div class="hint-card">
+        3. Me rolling in whenever you showed hate for someone because WHO AM I SUPPOSED TO SUPPORT IF NOT YOU AND ONLY YOU😭
+      </div>
+
+      <div class="hint-card">
+        4. Me rolling in into any unethical way to make money we planned was me trying to show that I would support anything you do😭
+      </div>
+
+      <div class="hint-card">
+        5. MEEE DODGING EVERY MOMENT IN WHICH YOU TRIED SHIPPING ME WITH SOMEONE, BECAUSE I WANTED YOU TO IMAGINE ME WITH YOU ONLY😭
+      </div>
+
+    </div>
+
+    <div class="suspicious">
+
+      You were never wrong in any of our past thousand messages,<br>
+
+      YOU NEVER FOUND THAT SUSPICIOUS ???!!??!!!<br>
+
+      😭😭😭😭
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SECTION 3 -->
+
+<section>
+
+  <div class="container glass fade moles">
+
+    <span class="eyebrow">
+      This is scientifically suspicioussss
+    </span>
+
+    <h2>
+      THE MOLES?????!?!??😭😭😭
+    </h2>
+
+    <p class="big">
+      THE MATCHING MOLESSS???!!!!!???😭😭😭
+      YOU KNOW WHAT, A NEW ONE JUST DEVELOPED
+      AND GUESS WHERE IT DID 😭
+      RIGHT ON THE KNUCKLE OF THE MIDDLE FINGER ON THE SAME HAND AS YOU BUT ON THE INSIDE OF THE HAND LIKE THE PALM.
+      UNBELIEVABLE RIGHTTTTT???!!!!!!?
+      IT DEVELOPED RIGHT AFTER WE TALKED EVERYTHING OUT😭😭😭
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- SECTION 4 -->
+
+<section id="chat">
+
+  <div class="container fade">
+
+    <div class="center">
+
+      <span class="eyebrow">
+        Random us archive
+      </span>
+
+      <h2>
+        Things we say instead of being normal
+      </h2>
 
       <p>
-        These are some of the hints that I have been dropping all along😭😭.
+        Tap and the whole chat changes.
       </p>
 
-      <div class="hint-list">
-        <div class="hint-card">1. Me sneaking in "I love You"s in between the texts😭</div>
-        <div class="hint-card">2. Me saying "lambo has only two seats" trying to soft launch me being able to see a future with you😭.</div>
-        <div class="hint-card">3. Me rolling in whenever you showed hate for someone because WHO AM I SUPPOSED TO SUPPORT IF NOT YOU AND ONLY YOU😭</div>
-        <div class="hint-card">4. Me rolling in into any unethical way to make money we planned was me trying to show that I would support anything you do😭</div>
-        <div class="hint-card">5. MEEE DODGING EVERY MOMENT IN WHICH YOU TRIED SHIPPING ME WITH SOMEONE, BECAUSE I WANTED YOU TO IMAGINE ME WITH YOU ONLY😭</div>
-      </div>
-
-      <div class="suspicious">
-        You were never wrong in any of our past thousand messages,<br>
-        YOU NEVER FOUND THAT SUSPICIOUS ???!!??!!!<br>
-        😭😭😭😭
-      </div>
     </div>
-  </section>
 
-  <!-- SECTION 3 -->
-  <section>
-    <div class="container glass fade moles">
-      <span class="eyebrow">This is scientifically suspicioussss</span>
-      <h2>THE MOLES?????!?!??😭😭😭</h2>
 
-      <p class="big">
-        THE MATCHING MOLESSS???!!!!!???😭😭😭
-        YOU KNOW WHAT, A NEW ONE JUST DEVELOPED 
-        AND GUESS WHERE IT DID 😭
-        RIGHT ON THE KNUCKLE OF THE MIDDLE FINGER ON THE SAME HAND AS YOU BUT ON THE INSIDE OF THE HAND LIKE THE PALM.
-        UNBELIEVABLE RIGHTTTTT???!!!!!!
-        IT DEVELOPED RIGHT AFTER WE TALKED EVERYTHING OUT😭😭😭
-      </p>
-    </div>
-  </section>
+    <div class="chat-phone">
 
-  <!-- SECTION 4 -->
-  <section id="chat">
-    <div class="container fade">
-      <div class="center">
-        <span class="eyebrow">Random us archive</span>
-        <h2>Things we say instead of being normal</h2>
-        <p>Tap and the whole chat changes.</p>
-      </div>
+      <div class="chat-top">
 
-      <div class="chat-phone">
-        <div class="chat-top">
-          <div>
-            <div class="chat-name">Us, </div>
-            <div class="chat-status" id="chatStatus">Sometimes we are deep sometimes we are Goofyyyy</div>
+        <div>
+
+          <div class="chat-name">
+            Us,
           </div>
-          <div>🩵🩷</div>
-        </div>
 
-        <div id="chatBox" class="chat-box"></div>
-
-        <div id="typing" class="typing">
-          <div class="dots">
-            <span></span><span></span><span></span>
+          <div
+            class="chat-status"
+            id="chatStatus"
+          >
+            Sometimes we are deep sometimes we are Goofyyyy
           </div>
+
         </div>
 
-        <div class="chat-actions">
-          <button class="btn" onclick="changeChat()">tap for a random us moment</button>
+        <div>
+          🩵🩷
         </div>
+
       </div>
+
+
+      <div
+        id="chatBox"
+        class="chat-box"
+      ></div>
+
+
+      <div
+        id="typing"
+        class="typing"
+      >
+
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+      </div>
+
+
+      <div class="chat-actions">
+
+        <button
+          class="btn"
+          onclick="changeChat()"
+        >
+          tap for a random us moment
+        </button>
+
+      </div>
+
     </div>
-  </section>
 
-  <!-- SECTION 5 -->
-  <section>
-    <div class="container fade">
-      <div class="center">
-        <span class="eyebrow">You are lowkey idiot but YOU ARE MY KINDAAAA IDIOTTT AND ONLYYYYY MINEEEE</span>
-        <h2>Your energy</h2>
-        <p>This is what I see you as.</p>
-      </div>
+  </div>
 
-      <div class="chaos-grid">
-        <div class="chaos-card">Tulip flower</div>
-        <div class="chaos-card">Strawberry icecream</div>
-        <div class="chaos-card">Tangled pink wired earphones</div>
-        <div class="chaos-card">A soft plushie</div>
-        <div class="chaos-card">Girl version of me who is way cooler than mee</div>
-        <div class="chaos-card">The comfort that I can never explain</div>
-        <div class="chaos-card">A cute asf piercing on lips</div>
-        <div class="chaos-card">Someone I belong to</div>
-      </div>
-    </div>
-  </section>
+</section>
 
-  <!-- SECTION 6 -->
-  <section>
-    <div class="container glass fade">
-      <span class="eyebrow">Twinnnnybunnn</span>
-      <h2>Things I quietly like about you (not very quietly lmaooooo)</h2>
 
-      <div class="likes-grid">
-        <div class="like-note">The way you overthink but still stay honest</div>
-        <div class="like-note">You saying “trust me i thought about this” like come onnn how much cuterrrr are you planning to be</div>
-        <div class="like-note">How you notice things and then pretend you didn’t</div>
-        <div class="like-note">The way you panic and then laugh right after</div>
-        <div class="like-note">You calling things “unhealthy” but still staying</div>
-        <div class="like-note">The fact that you didn’t make me feel like I had to explain myself</div>
-      </div>
-    </div>
-  </section>
+<!-- SECTION 5 -->
 
-  <!-- SECTION 7 -->
-  <section id="songsSection">
-    <div class="container fade">
-      <div class="center">
-        <span class="eyebrow">Songs I see Us in</span>
-        <h2>Songs</h2>
-        <p>
-          Even though you are always on my mind, these are some songs that are just yours in my head and heart.
-        </p>
-      </div>
+<section>
 
-      <div id="playerSlot" class="song-player-slot"></div>
+  <div class="container fade">
 
-      <div id="songGrid" class="song-grid"></div>
-    </div>
-  </section>
+    <div class="center">
 
-  <!-- MISS ME BUTTON -->
-  <section id="miss">
-    <div class="container glass fade center signal-card">
-      <span class="eyebrow">Tiny Signal</span>
-      <div class="signal-orb">☁️</div>
+      <span class="eyebrow">
+        You are lowkey idiot but YOU ARE MY KINDAAAA IDIOTTT AND ONLYYYYY MINEEEE
+      </span>
 
-      <h2>Miss Youu Button</h2>
+      <h2>
+        Your energy
+      </h2>
 
-      <p class="hero-line">
-        Even tho I will know TELEPATHICALLYYYY!!!!! but still
-        Press this when YOU MISS MEEE and I WILL KNOW❤️‍🩹🩵
+      <p>
+        This is what I see you as.
       </p>
 
-      <button id="missMeButton" class="btn miss-btn">
-        I am here CUTIEEE!!!
+    </div>
+
+
+    <div class="chaos-grid">
+
+      <div class="chaos-card">
+        Tulip flower
+      </div>
+
+      <div class="chaos-card">
+        Strawberry icecream
+      </div>
+
+      <div class="chaos-card">
+        Tangled pink wired earphones
+      </div>
+
+      <div class="chaos-card">
+        A soft plushie
+      </div>
+
+      <div class="chaos-card">
+        Girl version of me who is way cooler than mee
+      </div>
+
+      <div class="chaos-card">
+        The comfort that I can never explain
+      </div>
+
+      <div class="chaos-card">
+        A cute asf piercing on lips
+      </div>
+
+      <div class="chaos-card">
+        Someone I belong to
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SECTION 6 -->
+
+<section>
+
+  <div class="container glass fade">
+
+    <span class="eyebrow">
+      Twinnnnybunnn
+    </span>
+
+    <h2>
+      Things I quietly like about you (not very quietly lmaooooo)
+    </h2>
+
+    <div class="likes-grid">
+
+      <div class="like-note">
+        The way you overthink but still stay honest
+      </div>
+
+      <div class="like-note">
+        You saying “trust me i thought about this” like come onnn how much cuterrrr are you planning to be
+      </div>
+
+      <div class="like-note">
+        How you notice things and then pretend you didn’t
+      </div>
+
+      <div class="like-note">
+        The way you panic and then laugh right after
+      </div>
+
+      <div class="like-note">
+        You calling things “unhealthy” but still staying
+      </div>
+
+      <div class="like-note">
+        The fact that you didn’t make me feel like I had to explain myself
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SECTION 7 -->
+
+<section id="songsSection">
+
+  <div class="container fade">
+
+    <div class="center">
+
+      <span class="eyebrow">
+        Songs I see Us in
+      </span>
+
+      <h2>
+        Songs
+      </h2>
+
+      <p>
+        Even though you are always on my mind, these are some songs that are just yours in my head and heart.
+      </p>
+
+    </div>
+
+
+    <div
+      id="playerSlot"
+      class="song-player-slot"
+    ></div>
+
+
+    <div
+      id="songGrid"
+      class="song-grid"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- MISS ME BUTTON -->
+
+<section id="miss">
+
+  <div class="container glass fade center signal-card">
+
+    <span class="eyebrow">
+      Tiny Signal
+    </span>
+
+    <div class="signal-orb">
+      ☁️
+    </div>
+
+    <h2>
+      Miss Youu Button
+    </h2>
+
+    <p class="hero-line">
+      Even tho I will know TELEPATHICALLYYYY!!!!! but still
+      Press this when YOU MISS MEEE and I WILL KNOW❤️‍🩹🩵
+    </p>
+
+    <button
+      id="missMeButton"
+      class="btn miss-btn"
+    >
+      I am here CUTIEEE!!!
+    </button>
+
+    <p
+      id="missMeStatus"
+      style="margin-top: 18px; font-size: 15px;"
+    ></p>
+
+    <p class="soft-note">
+      I am never too busy for you DARLING.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- OPEN WHEN OVERTHINKING -->
+
+<section>
+
+  <div class="container glass fade center">
+
+    <span class="eyebrow">
+      OPEN WHEN OVERTHINKING
+    </span>
+
+    <h2>
+      Just in case your brain starts doing brain things,all you have to do is open this.
+    </h2>
+
+    <p class="hero-line">
+      This part is not dramatic.
+      It is just here for when you start thinking too much.
+    </p>
+
+
+    <div class="overthink-card">
+
+      <button
+        class="btn"
+        onclick="toggleOverthinking()"
+      >
+        open this softly
       </button>
 
-      <p id="missMeStatus" style="margin-top: 18px; font-size: 15px;"></p>
 
-      <p class="soft-note">
-        I am never too busy for you DARLING.
-      </p>
-    </div>
-  </section>
+      <div
+        id="overthinkingNote"
+        class="overthink-hidden"
+      >
+        If you’re overthinking, just know I AM HERE WITH YOU
+        and also remember how we got where we are today.
 
-  <!-- OPEN WHEN OVERTHINKING -->
-  <section>
-    <div class="container glass fade center">
-      <span class="eyebrow">OPEN WHEN OVERTHINKING</span>
-      <h2>Just in case your brain starts doing brain things,all you have to do is open this.</h2>
+        Nothing here is pressure.
+        Nothing here is me asking you to figure everything out today.
 
-      <p class="hero-line">
-        This part is not dramatic.
-        It is just here for when you start thinking too much.
-      </p>
+        This is just me saying that i’m glad it’s you.
+        I AM GLAD IT IS USSSS
+        And whatever pace this needs, we can let it be that pace.
 
-      <div class="overthink-card">
-        <button class="btn" onclick="toggleOverthinking()">open this softly</button>
-
-        <div id="overthinkingNote" class="overthink-hidden">
-If you’re overthinking, just know I AM HERE WITH YOU
-and also remember how we got where we are today.
-
-Nothing here is pressure.
-Nothing here is me asking you to figure everything out today.
-
-This is just me saying that i’m glad it’s you.
-I AM GLAD IT IS USSSS
-And whatever pace this needs, we can let it be that pace.
-
-you don’t have to panic.
-you don’t have to have perfect answers.
-just stay honest with what you feel, that’s enough.
-IT IS MY JOB FURTHERRR TO FIX EVERYTHING 
-AND TRUST ME I CAN AND WILL DO THIS🩵
-        </div>
+        you don’t have to panic.
+        you don’t have to have perfect answers.
+        just stay honest with what you feel, that’s enough.
+        IT IS MY JOB FURTHERRR TO FIX EVERYTHING
+        AND TRUST ME I CAN AND WILL DO THIS🩵
       </div>
+
     </div>
-  </section>
 
-  <!-- SECTION 8 -->
-  <section id="letterSection">
-    <div class="container glass fade center">
-      <span class="eyebrow">Open carefully</span>
-      <h2>A little letter</h2>
-      <p>tap the envelope.</p>
+  </div>
 
-      <div class="envelope-wrap">
-        <div id="envelope" class="envelope" onclick="openLetter()">
-          <div class="envelope-label">tap to open</div>
+</section>
 
-          <div class="letter">
+
+<!-- SECTION 8 -->
+
+<section id="letterSection">
+
+  <div class="container glass fade center">
+
+    <span class="eyebrow">
+      Open carefully
+    </span>
+
+    <h2>
+      A little letter
+    </h2>
+
+    <p>
+      tap the envelope.
+    </p>
+
+
+    <div class="envelope-wrap">
+
+      <div
+        id="envelope"
+        class="envelope"
+        onclick="openLetter()"
+      >
+
+        <div class="envelope-label">
+          tap to open
+        </div>
+
+
+        <div class="letter">
+
 We both know what we want and I know we both are going to work hard for that, just know the only force able to hinder our wish should be our parents and no one and nothing else. BUT ONLY "HINDER" BECAUSE I KNOW WE ARE GOING TO HAVE EACH OTHER FOR SURE. WE ARE GOING TO BE FULLY EACH OTHER'S FOREVER.
 
 
 And remember I'm not taking this as pressure and you DON'T HAVE TO TOOOOO. We will see where it takes us. You are my motivation. Just keep manifesting and stay positive.
 At last I just want to say I love you so so so much Komal and all I want to say is
-"YOU CAN HUG ME AS LONG AS YOU WANT AND CRY AS LONG AS YOU NEED TO 
+"YOU CAN HUG ME AS LONG AS YOU WANT AND CRY AS LONG AS YOU NEED TO
 AND TELL ME EACH AND EVERYTHING WHICH IS WRONG WITH YOU
-AND I WILL LISTEN TO ALL OF IT WHILE HOLDING YOU SO TIGHT 
-AND WHEN YOU ARE DONE I WILL MAKE SURE TO KISS ALL YOUR TEARS AWAY❤️." 
+AND I WILL LISTEN TO ALL OF IT WHILE HOLDING YOU SO TIGHT
+AND WHEN YOU ARE DONE I WILL MAKE SURE TO KISS ALL YOUR TEARS AWAY❤️."
 and I would keep loving you the same way regardless of how we end up in future.
 
 
 
 YOURS AFFECTIONATELY
 Aryan
-          </div>
+
         </div>
+
       </div>
+
     </div>
-  </section>
 
-  <!-- FINAL -->
-  <section>
-    <div class="container glass fade center">
-      <span class="eyebrow">I know I could've included this above but I just want you to spend more time on this.</span>
-      <h2>Final note</h2>
+  </div>
 
-      <p class="hero-line">
-        We don’t know where this goes.
-        We don’t need to know right now.
+</section>
 
-        I just know I LOVE this.
-        I LOVE USSSSS.
 
-        and I’m really glad it’s you.
-      </p>
+<!-- FINAL -->
 
-      <button class="btn" onclick="toggleFinalSecret()">tiny secret</button>
+<section>
 
-      <div id="finalSecret" class="final-secret">
-        This whole website is basically me saying “We have got this.” YES WE, YOU AND MEEE.
-      </div>
+  <div class="container glass fade center">
+
+    <span class="eyebrow">
+      I know I could've included this above but I just want you to spend more time on this.
+    </span>
+
+    <h2>
+      Final note
+    </h2>
+
+    <p class="hero-line">
+      We don’t know where this goes.
+      We don’t need to know right now.
+
+      I just know I LOVE this.
+      I LOVE USSSSS.
+
+      and I’m really glad it’s you.
+    </p>
+
+
+    <button
+      class="btn"
+      onclick="toggleFinalSecret()"
+    >
+      tiny secret
+    </button>
+
+
+    <div
+      id="finalSecret"
+      class="final-secret"
+    >
+      This whole website is basically me saying “We have got this.”
+      YES WE, YOU AND MEEE.
     </div>
-  </section>
 
-  <footer>
-    blue for me, pink for you, and PURPLEEEE!!!!!! this is for both of us
-  </footer>
+  </div>
 
-  <script>
-    /* FADE ON SCROLL */
-    const fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.14 });
+</section>
 
-    document.querySelectorAll(".fade").forEach(el => fadeObserver.observe(el));
 
-    /* CHAT RANDOMIZER */
-    const chats = [
-      [
-        { text: "i got an ideaaaa", type: "me" },
-        { text: "tell meee", type: "her" },
-        { text: "nahhh leave it", type: "me" },
-        { text: "YOU AREEEE dyin nowwww", type: "her" }
-      ],
-      [
-        { text: "NOW WE ARE FUCKEDDDDD, both of ussss", type: "me" },
-        { text: "WAIT DELETE THE CONVERSATIONN, THIS NEVER HAPPENED", type: "her" },
-        { text: "hahahaha IT WAS A PRANKKKKK.", type: "me" },
-        { text: "hahah april foooolsssss", type: "her" }
-      ],
-      [
-        { text: "trust me i thought about this", type: "her" },
-        { text: "that is exactly why im scared", type: "me" },
-        { text: "BITCHHHHHH", type: "her" },
-        { text: "im listening twinnnn", type: "me" }
-      ],
-      [
-        { text: "are you mad at me??????", type: "her" },
-        { text: "havee I ever got mad at you in past?", type: "me" },
-        { text: "like actually?", type: "her" },
-        { text: "like actually???", type: "me" }
-      ],
-      [
-        { text: "let's die together", type: "me" },
-        { text: "CAN DO THAT", type: "her" },
-        { text: "CALMLY?", type: "me" },
-        { text: "nahhhh, WITH CHAOSSSSS rahhhhhhh", type: "her" }
-      ],
-      [
-        { text: "you caught the hint?", type: "me" },
-        { text: "obviously 😭", type: "her" },
-        { text: "and still stayed silent?", type: "me" },
-        { text: "I LOVEDDDD TO", type: "her" }
-      ],
-      [
-        { text: "i would support your unethical plans", type: "me" },
-        { text: "that sounds bad", type: "her" },
-        { text: "emotionally supportive crime partner", type: "me" },
-        { text: "😭😭", type: "her" }
-      ],
-      [
-        { text: "aightt this is my contact.", type: "me" },
-        { text: "aint no one callling you bro", type: "her" },
-        { text: "6789998212  (the upper text hurt me at that moment btw)", type: "me" },
-        { text: "😭😭", type: "her" }
-      ],
-      [
-        { text: "aaah karo", type: "me" },
-        { text: "you can be a good mother", type: "her" },
-        { text: "lmaooooo whatt", type: "me" },
-        { text: "where your aprin at?", type: "her" }
-      ],
-      [
-        { text: "i just know you are secret agentt", type: "me" },
-        { text: "you know tooo muchhh", type: "her" },
-        { text: "YOU ARE CAUGHTTTTTT", type: "me" },
-        { text: "sending 6 alpha males your way.", type: "her" }
-      ],
-      [
-        { text: "we dont even talk daily", type: "me" },
-        { text: "you know why", type: "her" },
-        { text: "i know", type: "me" },
-        { text: "and you're okay?", type: "her" },
-        { text: "i am ALWAYS OKIII GIRLYYYY", type: "me" }
-      ],
-      [
-        { text: "future?", type: "her" },
-        { text: "future.", type: "me" },
-        { text: "dont take pressure , okay?", type: "her" },
-        { text: "never. just manifesting.", type: "me" }
-      ],
-      [
-        { text: "ik that you are the one", type: "her" },
-        { text: "what did you just sayyyyy?????", type: "me" },
-        { text: "what?", type: "her" },
-        { text: "whattttttttt??", type: "me" }
-      ],
-      [
-        { text: "become a femboy", type: "her" },
-        { text: "what?????", type: "me" },
-        { text: "where your cat earsss at??", type: "her" },
-        { text: "whattttttttt??", type: "me" }
-      ],
-      [
-        { text: "so this is the plan.", type: "me" },
-        { text: "I AM GONNA HAVE YOU FOR REALLLLL", type: "her" },
-        { text: "AND YOU ARE GOING TO BE MINE", type: "me" },
-        { text: "am gonnna lose my shit frrrrrrr", type: "her" }
-      ],
-      [
-        { text: "we can live on streets.", type: "her" },
-        { text: "I just want to give you a good life", type: "me" },
-        { text: "Trust me it would be good if its with you.", type: "her" },
-        { text: "okay im breaking the 4th wall here but this line of yours is forever going to stay in my head till we start living together ", type: "me" }
-      ],
-      [
-        { text: "teeeethhhh🤤", type: "her" },
-        { text: "skinnnnn🤤", type: "her" },
-        { text: "absssss🤤", type: "her" },
-        { text: "spammmmm🤤", type: "her" }
-      ],
-      [
-        { text: "you are cute ngllll", type: "her" },
-        { text: "just the effect of your energy", type: "me" },
-        { text: "idk how to take this innnn", type: "her" },
-        { text: "i wanna take a bite off of youuu", type: "me" }
-      ]
-    ];
+<footer>
+  blue for me, pink for you, and PURPLEEEE!!!!!! this is for both of us
+</footer>
 
-    function loadChat(chat) {
-      const chatBox = document.getElementById("chatBox");
-      chatBox.innerHTML = "";
 
-      chat.forEach((msg, index) => {
-        setTimeout(() => {
-          const div = document.createElement("div");
-          div.className = "msg " + msg.type;
-          div.textContent = msg.text;
-          chatBox.appendChild(div);
-        }, index * 160);
-      });
-    }
+<script>
 
-    function changeChat() {
-      const chatBox = document.getElementById("chatBox");
-      const typing = document.getElementById("typing");
-      const status = document.getElementById("chatStatus");
+/* FADE ON SCROLL */
 
-      chatBox.classList.add("fade-out");
-      status.textContent = "typing...";
+const fadeObserver = new IntersectionObserver(
+  (entries) => {
 
-      setTimeout(() => {
-        chatBox.innerHTML = "";
-        chatBox.classList.remove("fade-out");
-        typing.classList.add("show");
+    entries.forEach(entry => {
 
-        setTimeout(() => {
-          typing.classList.remove("show");
-          const randomChat = chats[Math.floor(Math.random() * chats.length)];
-          loadChat(randomChat);
-          status.textContent = "online but overthinking";
-        }, 850);
-      }, 280);
-    }
-
-    loadChat(chats[0]);
-
-    /* SONGS */
-    const songs = [
-      { title: "Pink Bubblegum", artist: "Lavi", youtube: "F30Pb7NSieE" },
-      { title: "Perfect Pair", artist: "Beabadoobee", youtube: "nhb0yQgjJRE" },
-      { title: "Hotel Room", artist: "Ax and the Hatchetmen", youtube: "9Z1k8thLiNE" },
-      { title: "No.1 Party Anthem", artist: "Arctic Monkeys", youtube: "zjZD-ibfhnU" },
-      { title: "Track 10", artist: "Charli XCX", youtube: "50uYJLWWwus" },
-      { title: "Stay", artist: "The Kid LAROI & Justin Bieber", youtube: "yWHrYNP6j4k" },
-      { title: "Thehra", artist: "Chaar Diwaari", youtube: "NC0fZFS-kwI" },
-      { title: "Kaafizyada", artist: "Nanku", youtube: "Q5TytaTKIR0" },
-      { title: "Little Bit", artist: "Ella Boh", youtube: "R-mbcxjiZzg" },
-      { title: "Scott and Zelda", artist: "BIBI", youtube: "d7glwJ5yd20" },
-      { title: "The Machine Sped Up", artist: "Reed Wonder", youtube: "cWAsDlDAKv4" },
-      { title: "I Luv It", artist: "Camila Cabello and Carti", youtube: "rDG-6Ue_Qbw" },
-      { title: "Boyfriend", artist: "Ariana Grande", youtube: "9SRxBTtspYM" },
-      { title: "APT.", artist: "ROSÉ and Bruno Mars", youtube: "ekr2nIex040" },
-      { title: "Golden Hour", artist: "JVKE", youtube: "PEM0Vs8jf1w" },
-      { title: "Ishq Wala Love", artist: "SOTY", youtube: "VmH8tELQ3aE" },
-      { title: "Something About You", artist: "Eyedress and Dent May", youtube: "0VAAS9xnS5U" },
-      { title: "That's What I Like", artist: "Bruno Mars", youtube: "PMivT7MJ41M" },
-      { title: "Love Me Not", artist: "Ravyn Lenae", youtube: "cswfR85D7jM" },
-      { title: "Kingston", artist: "Faye Webster", youtube: "-5_tGEao_GQ" },
-      { title: "Chest Pain", artist: "Malcolm Todd", youtube: "ujiJic-KLbQ" },
-      { title: "Heaven Can Wait", artist: "Michael Jackson", youtube: "TDVlDUAIz5k" },
-      { title: "Ur All Mine", artist: "Westwood", youtube: "L_gJIpSFAZQ" },
-      { title: "Catch Catch", artist: "YENA", youtube: "NOiyDlWl534" },
-      { title: "Flatline", artist: "Justin Bieber", youtube: "YEVcnTIq1us" },
-      { title: "Simon Says", artist: "YC Banks ft. B Smyth", youtube: "di589Qr0BV0" },
-      { title: "Kill Bill", artist: "SZA", youtube: "MSRcC626prw" },
-      { title: "Double Take", artist: "Dhruv", youtube: "R8FHtIhWqNo" },
-      { title: "Dark Red", artist: "Steve Lacy", youtube: "xRzbLQ_WKPs" },
-      { title: "Tu Hai Wahi", artist: "Sufr", youtube: "XZfR4MibzMQ" },
-      { title: "Pink Lips", artist: "Meet Bros", youtube: "w5VFOKKAbQQ" },
-      { title: "Bleeding Out", artist: "Ella Boh", youtube: "u9wnnlHx0FE" }
-    ];
-
-    const songGrid = document.getElementById("songGrid");
-    const youtubePlayer = document.getElementById("youtubePlayer");
-    const nowPlaying = document.getElementById("nowPlaying");
-    const globalMusicPlayer = document.getElementById("globalMusicPlayer");
-    const playerSlot = document.getElementById("playerSlot");
-
-    let playerHasStarted = false;
-
-    function embedUrl(videoId, autoplay) {
-      return `https://www.youtube-nocookie.com/embed/${videoId}?${autoplay ? "autoplay=1&" : ""}rel=0`;
-    }
-
-    function isBigPlayerAreaVisible() {
-      const rect = playerSlot.getBoundingClientRect();
-
-      return (
-        rect.top < window.innerHeight - 120 &&
-        rect.bottom > 120
-      );
-    }
-
-    function positionPlayerAsBig() {
-      const rect = playerSlot.getBoundingClientRect();
-
-      globalMusicPlayer.classList.add("show");
-      globalMusicPlayer.classList.remove("mini");
-
-      globalMusicPlayer.style.top = `${rect.top}px`;
-      globalMusicPlayer.style.left = `${rect.left}px`;
-      globalMusicPlayer.style.right = "auto";
-      globalMusicPlayer.style.width = `${rect.width}px`;
-    }
-
-    function positionPlayerAsMini() {
-      globalMusicPlayer.classList.add("show");
-      globalMusicPlayer.classList.add("mini");
-
-      if (window.innerWidth <= 650) {
-        globalMusicPlayer.style.top = "12px";
-        globalMusicPlayer.style.left = "12px";
-        globalMusicPlayer.style.right = "12px";
-        globalMusicPlayer.style.width = "auto";
-      } else {
-        globalMusicPlayer.style.top = "95px";
-        globalMusicPlayer.style.left = "auto";
-        globalMusicPlayer.style.right = "22px";
-        globalMusicPlayer.style.width = "310px";
-      }
-    }
-
-    function hidePlayerUntilNeeded() {
-      globalMusicPlayer.classList.remove("show");
-    }
-
-    function updatePlayerPosition() {
-      const bigVisible = isBigPlayerAreaVisible();
-
-      if (bigVisible) {
-        positionPlayerAsBig();
-        return;
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
       }
 
-      if (playerHasStarted) {
-        positionPlayerAsMini();
-        return;
-      }
+    });
 
-      hidePlayerUntilNeeded();
-    }
+  },
+  {
+    threshold:0.14
+  }
+);
 
-   function playSong(videoId, title, artist) {
+document
+  .querySelectorAll(".fade")
+  .forEach(el => fadeObserver.observe(el));
+
+
+/* CHAT RANDOMIZER */
+
+const chats = [
+
+  [
+    { text: "i got an ideaaaa", type: "me" },
+    { text: "tell meee", type: "her" },
+    { text: "nahhh leave it", type: "me" },
+    { text: "YOU AREEEE dyin nowwww", type: "her" }
+  ],
+
+  [
+    { text: "NOW WE ARE FUCKEDDDDD, both of ussss", type: "me" },
+    { text: "WAIT DELETE THE CONVERSATIONN, THIS NEVER HAPPENED", type: "her" },
+    { text: "hahahaha IT WAS A PRANKKKKK.", type: "me" },
+    { text: "hahah april foooolsssss", type: "her" }
+  ],
+
+  [
+    { text: "trust me i thought about this", type: "her" },
+    { text: "that is exactly why im scared", type: "me" },
+    { text: "BITCHHHHHH", type: "her" },
+    { text: "im listening twinnnn", type: "me" }
+  ],
+
+  [
+    { text: "are you mad at me??????", type: "her" },
+    { text: "havee I ever got mad at you in past?", type: "me" },
+    { text: "like actually?", type: "her" },
+    { text: "like actually???", type: "me" }
+  ],
+
+  [
+    { text: "let's die together", type: "me" },
+    { text: "CAN DO THAT", type: "her" },
+    { text: "CALMLY?", type: "me" },
+    { text: "nahhhh, WITH CHAOSSSSS rahhhhhhh", type: "her" }
+  ],
+
+  [
+    { text: "you caught the hint?", type: "me" },
+    { text: "obviously 😭", type: "her" },
+    { text: "and still stayed silent?", type: "me" },
+    { text: "I LOVEDDDD TO", type: "her" }
+  ],
+
+  [
+    { text: "i would support your unethical plans", type: "me" },
+    { text: "that sounds bad", type: "her" },
+    { text: "emotionally supportive crime partner", type: "me" },
+    { text: "😭😭", type: "her" }
+  ],
+
+  [
+    { text: "aightt this is my contact.", type: "me" },
+    { text: "aint no one callling you bro", type: "her" },
+    { text: "6789998212  (the upper text hurt me at that moment btw)", type: "me" },
+    { text: "😭😭", type: "her" }
+  ],
+
+  [
+    { text: "aaah karo", type: "me" },
+    { text: "you can be a good mother", type: "her" },
+    { text: "lmaooooo whatt", type: "me" },
+    { text: "where your aprin at?", type: "her" }
+  ],
+
+  [
+    { text: "i just know you are secret agentt", type: "me" },
+    { text: "you know tooo muchhh", type: "her" },
+    { text: "YOU ARE CAUGHTTTTTT", type: "me" },
+    { text: "sending 6 alpha males your way.", type: "her" }
+  ],
+
+  [
+    { text: "we dont even talk daily", type: "me" },
+    { text: "you know why", type: "her" },
+    { text: "i know", type: "me" },
+    { text: "and you're okay?", type: "her" },
+    { text: "i am ALWAYS OKIII GIRLYYYY", type: "me" }
+  ],
+
+  [
+    { text: "future?", type: "her" },
+    { text: "future.", type: "me" },
+    { text: "dont take pressure , okay?", type: "her" },
+    { text: "never. just manifesting.", type: "me" }
+  ],
+
+  [
+    { text: "ik that you are the one", type: "her" },
+    { text: "what did you just sayyyyy?????", type: "me" },
+    { text: "what?", type: "her" },
+    { text: "whattttttttt??", type: "me" }
+  ],
+
+  [
+    { text: "become a femboy", type: "her" },
+    { text: "what?????", type: "me" },
+    { text: "where your cat earsss at??", type: "her" },
+    { text: "whattttttttt??", type: "me" }
+  ],
+
+  [
+    { text: "so this is the plan.", type: "me" },
+    { text: "I AM GONNA HAVE YOU FOR REALLLLL", type: "her" },
+    { text: "AND YOU ARE GOING TO BE MINE", type: "me" },
+    { text: "am gonnna lose my shit frrrrr", type: "her" }
+  ],
+
+  [
+    { text: "we can live on streets.", type: "her" },
+    { text: "I just want to give you a good life", type: "me" },
+    { text: "Trust me it would be good if its with you.", type: "her" },
+    { text: "okay im breaking the 4th wall here but this line of yours is forever going to stay in my head till we start living together ", type: "me" }
+  ],
+
+  [
+    { text: "teeeethhhh🤤", type: "her" },
+    { text: "skinnnnn🤤", type: "her" },
+    { text: "absssss🤤", type: "her" },
+    { text: "spammmmm🤤", type: "her" }
+  ],
+
+  [
+    { text: "you are cute ngllll", type: "her" },
+    { text: "just the effect of your energy", type: "me" },
+    { text: "idk how to take this innnn", type: "her" },
+    { text: "i wanna take a bite off of youuu", type: "me" }
+  ]
+
+];
+
+
+function loadChat(chat){
+
+  const chatBox =
+    document.getElementById("chatBox");
+
+  chatBox.innerHTML = "";
+
+  chat.forEach((msg,index) => {
+
+    setTimeout(() => {
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "msg " + msg.type;
+
+      div.textContent =
+        msg.text;
+
+      chatBox.appendChild(div);
+
+    }, index * 160);
+
+  });
+
+}
+
+
+function changeChat(){
+
+  const chatBox =
+    document.getElementById("chatBox");
+
+  const typing =
+    document.getElementById("typing");
+
+  const status =
+    document.getElementById("chatStatus");
+
+  chatBox.classList.add("fade-out");
+
+  status.textContent =
+    "typing...";
+
+
+  setTimeout(() => {
+
+    chatBox.innerHTML = "";
+
+    chatBox.classList.remove("fade-out");
+
+    typing.classList.add("show");
+
+
+    setTimeout(() => {
+
+      typing.classList.remove("show");
+
+      const randomChat =
+        chats[
+          Math.floor(
+            Math.random() * chats.length
+          )
+        ];
+
+      loadChat(randomChat);
+
+      status.textContent =
+        "online but overthinking";
+
+    },850);
+
+  },280);
+
+}
+
+
+loadChat(chats[0]);
+
+
+/* SONGS */
+
+const songs = [
+
+  { title:"Pink Bubblegum",artist:"Lavi",youtube:"F30Pb7NSieE" },
+  { title:"Perfect Pair",artist:"Beabadoobee",youtube:"nhb0yQgjJRE" },
+  { title:"Hotel Room",artist:"Ax and the Hatchetmen",youtube:"9Z1k8thLiNE" },
+  { title:"No.1 Party Anthem",artist:"Arctic Monkeys",youtube:"zjZD-ibfhnU" },
+  { title:"Track 10",artist:"Charli XCX",youtube:"50uYJLWWwus" },
+  { title:"Stay",artist:"The Kid LAROI & Justin Bieber",youtube:"yWHrYNP6j4k" },
+  { title:"Thehra",artist:"Chaar Diwaari",youtube:"NC0fZFS-kwI" },
+  { title:"Kaafizyada",artist:"Nanku",youtube:"Q5TytaTKIR0" },
+  { title:"Little Bit",artist:"Ella Boh",youtube:"R-mbcxjiZzg" },
+  { title:"Scott and Zelda",artist:"BIBI",youtube:"d7glwJ5yd20" },
+  { title:"The Machine Sped Up",artist:"Reed Wonder",youtube:"cWAsDlDAKv4" },
+  { title:"I Luv It",artist:"Camila Cabello and Carti",youtube:"rDG-6Ue_Qbw" },
+  { title:"Boyfriend",artist:"Ariana Grande",youtube:"9SRxBTtspYM" },
+  { title:"APT.",artist:"ROSÉ and Bruno Mars",youtube:"ekr2nIex040" },
+  { title:"Golden Hour",artist:"JVKE",youtube:"PEM0Vs8jf1w" },
+  { title:"Ishq Wala Love",artist:"SOTY",youtube:"VmH8tELQ3aE" },
+  { title:"Something About You",artist:"Eyedress and Dent May",youtube:"0VAAS9xnS5U" },
+  { title:"That's What I Like",artist:"Bruno Mars",youtube:"PMivT7MJ41M" },
+  { title:"Love Me Not",artist:"Ravyn Lenae",youtube:"cswfR85D7jM" },
+  { title:"Kingston",artist:"Faye Webster",youtube:"-5_tGEao_GQ" },
+  { title:"Chest Pain",artist:"Malcolm Todd",youtube:"ujiJic-KLbQ" },
+  { title:"Heaven Can Wait",artist:"Michael Jackson",youtube:"TDVlDUAIz5k" },
+  { title:"Ur All Mine",artist:"Westwood",youtube:"L_gJIpSFAZQ" },
+  { title:"Catch Catch",artist:"YENA",youtube:"NOiyDlWl534" },
+  { title:"Flatline",artist:"Justin Bieber",youtube:"YEVcnTIq1us" },
+  { title:"Simon Says",artist:"YC Banks ft. B Smyth",youtube:"di589Qr0BV0" },
+  { title:"Kill Bill",artist:"SZA",youtube:"MSRcC626prw" },
+  { title:"Double Take",artist:"Dhruv",youtube:"R8FHtIhWqNo" },
+  { title:"Dark Red",artist:"Steve Lacy",youtube:"xRzbLQ_WKPs" },
+  { title:"Tu Hai Wahi",artist:"Sufr",youtube:"XZfR4MibzMQ" },
+  { title:"Pink Lips",artist:"Meet Bros",youtube:"w5VFOKKAbQQ" },
+  { title:"Bleeding Out",artist:"Ella Boh",youtube:"u9wnnlHx0FE" }
+
+];
+
+
+const songGrid =
+  document.getElementById("songGrid");
+
+const youtubePlayer =
+  document.getElementById("youtubePlayer");
+
+const nowPlaying =
+  document.getElementById("nowPlaying");
+
+const globalMusicPlayer =
+  document.getElementById("globalMusicPlayer");
+
+const playerSlot =
+  document.getElementById("playerSlot");
+
+
+let playerHasStarted = false;
+
+
+function embedUrl(videoId,autoplay){
+
+  return `https://www.youtube-nocookie.com/embed/${videoId}?${autoplay ? "autoplay=1&" : ""}rel=0`;
+
+}
+
+
+function isBigPlayerAreaVisible(){
+
+  const rect =
+    playerSlot.getBoundingClientRect();
+
+  return (
+    rect.top < window.innerHeight - 120 &&
+    rect.bottom > 120
+  );
+
+}
+
+
+function positionPlayerAsBig(){
+
+  const rect =
+    playerSlot.getBoundingClientRect();
+
+  globalMusicPlayer.classList.add("show");
+
+  globalMusicPlayer.classList.remove("mini");
+
+  globalMusicPlayer.style.top =
+    `${rect.top}px`;
+
+  globalMusicPlayer.style.left =
+    `${rect.left}px`;
+
+  globalMusicPlayer.style.right =
+    "auto";
+
+  globalMusicPlayer.style.width =
+    `${rect.width}px`;
+
+}
+
+
+function positionPlayerAsMini(){
+
+  globalMusicPlayer.classList.add("show");
+
+  globalMusicPlayer.classList.add("mini");
+
+
+  if(window.innerWidth <= 650){
+
+    globalMusicPlayer.style.top =
+      "12px";
+
+    globalMusicPlayer.style.left =
+      "12px";
+
+    globalMusicPlayer.style.right =
+      "12px";
+
+    globalMusicPlayer.style.width =
+      "auto";
+
+  }else{
+
+    globalMusicPlayer.style.top =
+      "95px";
+
+    globalMusicPlayer.style.left =
+      "auto";
+
+    globalMusicPlayer.style.right =
+      "22px";
+
+    globalMusicPlayer.style.width =
+      "310px";
+
+  }
+
+}
+
+
+function hidePlayerUntilNeeded(){
+
+  globalMusicPlayer.classList.remove("show");
+
+}
+
+
+function updatePlayerPosition(){
+
+  const bigVisible =
+    isBigPlayerAreaVisible();
+
+
+  if(bigVisible){
+
+    positionPlayerAsBig();
+
+    return;
+
+  }
+
+
+  if(playerHasStarted){
+
+    positionPlayerAsMini();
+
+    return;
+
+  }
+
+
+  hidePlayerUntilNeeded();
+
+}
+
+
+function playSong(videoId,title,artist){
+
   playerHasStarted = true;
 
-  youtubePlayer.src = embedUrl(videoId, true);
-  nowPlaying.textContent = `Now playing: ${title} — ${artist}`;
+  youtubePlayer.src =
+    embedUrl(videoId,true);
+
+  nowPlaying.textContent =
+    `Now playing: ${title} — ${artist}`;
 
   updatePlayerPosition();
 
-  // Silent song tracking. Nothing appears on the website.
-  trackSongPlay(title, artist);
+  trackSongPlay(title,artist);
+
 }
-async function trackSongPlay(title, artist) {
-  try {
-    await fetch("/.netlify/functions/track-song", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title: title,
-        artist: artist
-      })
-    });
-  } catch (error) {
-    console.log("Song tracking failed:", error);
+
+
+async function trackSongPlay(title,artist){
+
+  try{
+
+    await fetch(
+      "/.netlify/functions/track-song",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          title:title,
+          artist:artist
+        })
+
+      }
+    );
+
+  }catch(error){
+
+    console.log(
+      "Song tracking failed:",
+      error
+    );
+
   }
+
 }
 
-    songs.forEach((song, index) => {
-      const query = encodeURIComponent(`${song.title} ${song.artist} lyrics`);
 
-      const card = document.createElement("div");
-      card.className = "song-card";
+songs.forEach((song,index) => {
 
-      const title = document.createElement("strong");
-      title.textContent = `${index + 1}. ${song.title}`;
+  const query =
+    encodeURIComponent(
+      `${song.title} ${song.artist} lyrics`
+    );
 
-      const artist = document.createElement("small");
-      artist.textContent = song.artist;
 
-      const actions = document.createElement("div");
-      actions.className = "song-actions";
+  const card =
+    document.createElement("div");
 
-      const playBtn = document.createElement("button");
-      playBtn.className = "btn";
-      playBtn.textContent = "play here";
+  card.className =
+    "song-card";
 
-      playBtn.addEventListener("click", () => {
-        playSong(song.youtube, song.title, song.artist);
-      });
 
-      const searchLink = document.createElement("a");
-      searchLink.className = "song-link";
-      searchLink.href = `https://www.youtube.com/results?search_query=${query}`;
-      searchLink.target = "_blank";
-      searchLink.textContent = "lyrics search";
+  const title =
+    document.createElement("strong");
 
-      actions.appendChild(playBtn);
-      actions.appendChild(searchLink);
+  title.textContent =
+    `${index + 1}. ${song.title}`;
 
-      card.appendChild(title);
-      card.appendChild(artist);
-      card.appendChild(actions);
 
-      songGrid.appendChild(card);
-    });
+  const artist =
+    document.createElement("small");
 
-    window.addEventListener("scroll", updatePlayerPosition);
-    window.addEventListener("resize", updatePlayerPosition);
-    window.addEventListener("load", updatePlayerPosition);
+  artist.textContent =
+    song.artist;
 
-    setTimeout(updatePlayerPosition, 100);
-    
 
-    /* LETTER */
-function openLetter() {
-  document.getElementById("envelope").classList.add("open");
+  const actions =
+    document.createElement("div");
+
+  actions.className =
+    "song-actions";
+
+
+  const playBtn =
+    document.createElement("button");
+
+  playBtn.className =
+    "btn";
+
+  playBtn.textContent =
+    "play here";
+
+
+  playBtn.addEventListener(
+    "click",
+    () => {
+
+      playSong(
+        song.youtube,
+        song.title,
+        song.artist
+      );
+
+    }
+  );
+
+
+  const searchLink =
+    document.createElement("a");
+
+  searchLink.className =
+    "song-link";
+
+  searchLink.href =
+    `https://www.youtube.com/results?search_query=${query}`;
+
+  searchLink.target =
+    "_blank";
+
+  searchLink.textContent =
+    "lyrics search";
+
+
+  actions.appendChild(playBtn);
+  actions.appendChild(searchLink);
+
+  card.appendChild(title);
+  card.appendChild(artist);
+  card.appendChild(actions);
+
+  songGrid.appendChild(card);
+
+});
+
+
+window.addEventListener(
+  "scroll",
+  updatePlayerPosition
+);
+
+window.addEventListener(
+  "resize",
+  updatePlayerPosition
+);
+
+window.addEventListener(
+  "load",
+  updatePlayerPosition
+);
+
+setTimeout(
+  updatePlayerPosition,
+  100
+);
+
+
+/* LETTER */
+
+function openLetter(){
+
+  document
+    .getElementById("envelope")
+    .classList.add("open");
 
   trackLetterOpen();
+
 }
+
 
 /* WHATSAPP TRACKING */
-async function trackWhatsappClick() {
-  try {
-    await fetch("/.netlify/functions/miss-me", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        action: "whatsapp_button_clicked"
-      })
-    });
-  } catch (err) {
-    console.log("whatsapp tracking failed");
+
+async function trackWhatsappClick(){
+
+  try{
+
+    await fetch(
+      "/.netlify/functions/miss-me",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          action:"whatsapp_button_clicked"
+        })
+
+      }
+    );
+
+  }catch(err){
+
+    console.log(
+      "whatsapp tracking failed"
+    );
+
   }
+
 }
+
 
 /* LETTER TRACKING */
-async function trackLetterOpen() {
-  try {
-    await fetch("/.netlify/functions/miss-me", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        action: "letter_opened"
-      })
-    });
-  } catch (err) {
-    console.log("letter tracking failed");
+
+async function trackLetterOpen(){
+
+  try{
+
+    await fetch(
+      "/.netlify/functions/miss-me",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          action:"letter_opened"
+        })
+
+      }
+    );
+
+  }catch(err){
+
+    console.log(
+      "letter tracking failed"
+    );
+
   }
+
 }
 
-    /* OPEN WHEN OVERTHINKING */
-    function toggleOverthinking() {
-      document.getElementById("overthinkingNote").classList.toggle("show");
-    }
 
-    /* FINAL SECRET */
-    function toggleFinalSecret() {
-      document.getElementById("finalSecret").classList.toggle("show");
-    }
+/* OPEN WHEN OVERTHINKING */
 
-    /* FLOATING CLICK NOTES */
-    document.addEventListener("click", function(e) {
-      const note = document.createElement("div");
-      note.className = "floating-note";
-      note.textContent = Math.random() > 0.5 ? "♡" : "♪";
-      note.style.left = e.clientX + "px";
-      note.style.top = e.clientY + "px";
-      document.body.appendChild(note);
+function toggleOverthinking(){
 
-      setTimeout(() => note.remove(), 1400);
-    });
+  document
+    .getElementById("overthinkingNote")
+    .classList.toggle("show");
 
-    /* MISS ME TELEGRAM BUTTON - NETLIFY VERSION */
-    const missMeButton = document.getElementById("missMeButton");
-    const missMeStatus = document.getElementById("missMeStatus");
+}
 
-    let missMeCooldown = false;
 
-    if (missMeButton) {
-      missMeButton.addEventListener("click", async () => {
-        if (missMeCooldown) {
-          missMeStatus.textContent = "already sent, don’t spam him 😭";
-          return;
-        }
+/* FINAL SECRET */
 
-        missMeCooldown = true;
-        missMeButton.disabled = true;
-        missMeButton.textContent = "sending...";
-        missMeStatus.textContent = "";
+function toggleFinalSecret(){
 
-        try {
-          const response = await fetch("/.netlify/functions/miss-me", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
+  document
+    .getElementById("finalSecret")
+    .classList.toggle("show");
+
+}
+
+
+/* FLOATING CLICK NOTES */
+
+document.addEventListener(
+  "click",
+  function(e){
+
+    const note =
+      document.createElement("div");
+
+    note.className =
+      "floating-note";
+
+    note.textContent =
+      Math.random() > 0.5
+      ? "♡"
+      : "♪";
+
+    note.style.left =
+      e.clientX + "px";
+
+    note.style.top =
+      e.clientY + "px";
+
+    document.body.appendChild(note);
+
+
+    setTimeout(
+      () => note.remove(),
+      1400
+    );
+
+  }
+);
+
+
+/* MISS ME TELEGRAM BUTTON - NETLIFY VERSION */
+
+const missMeButton =
+  document.getElementById("missMeButton");
+
+const missMeStatus =
+  document.getElementById("missMeStatus");
+
+
+let missMeCooldown = false;
+
+
+if(missMeButton){
+
+  missMeButton.addEventListener(
+    "click",
+    async () => {
+
+      if(missMeCooldown){
+
+        missMeStatus.textContent =
+          "already sent, don’t spam him 😭";
+
+        return;
+
+      }
+
+
+      missMeCooldown = true;
+
+      missMeButton.disabled = true;
+
+      missMeButton.textContent =
+        "sending...";
+
+      missMeStatus.textContent =
+        "";
+
+
+      try{
+
+        const response =
+          await fetch(
+            "/.netlify/functions/miss-me",
+            {
+              method:"POST",
+
+              headers:{
+                "Content-Type":"application/json"
+              }
             }
-          });
+          );
 
-          const data = await response.json();
 
-          if (response.ok && data.ok) {
-            missMeButton.textContent = "sent 😭";
-            missMeStatus.textContent = "sent. now don’t overthink it.";
-          } else {
-            missMeButton.textContent = "try again";
-            missMeStatus.textContent =
-              data.error
-                ? `error: ${data.error}`
-                : "something broke, tell Aryan to fix it 😭";
+        const data =
+          await response.json();
 
-            missMeCooldown = false;
-            missMeButton.disabled = false;
-          }
-        } catch (error) {
-          missMeButton.textContent = "try again";
-          missMeStatus.textContent = "something broke, tell Aryan to fix it 😭";
+
+        if(
+          response.ok &&
+          data.ok
+        ){
+
+          missMeButton.textContent =
+            "sent 😭";
+
+          missMeStatus.textContent =
+            "sent. now don’t overthink it.";
+
+        }else{
+
+          missMeButton.textContent =
+            "try again";
+
+          missMeStatus.textContent =
+            data.error
+            ? `error: ${data.error}`
+            : "something broke, tell Aryan to fix it 😭";
+
+
           missMeCooldown = false;
-          missMeButton.disabled = false;
+
+          missMeButton.disabled =
+            false;
+
         }
 
-        setTimeout(() => {
+      }catch(error){
+
+        missMeButton.textContent =
+          "try again";
+
+        missMeStatus.textContent =
+          "something broke, tell Aryan to fix it 😭";
+
+        missMeCooldown = false;
+
+        missMeButton.disabled =
+          false;
+
+      }
+
+
+      setTimeout(
+        () => {
+
           missMeCooldown = false;
-          missMeButton.disabled = false;
-          missMeButton.textContent = "You can SPAM now NOWWWWW GIRLYYYYY!!!😝🤤";
-        }, 1000);
-      });
+
+          missMeButton.disabled =
+            false;
+
+          missMeButton.textContent =
+            "You can SPAM now NOWWWWW GIRLYYYYY!!!😝🤤";
+
+        },
+        1000
+      );
+
     }
-    /* FLOATING WORDS + DOODLES */
-const softDoodlesContainer = document.getElementById("softDoodles");
+  );
+
+}
+
+
+/* FLOATING WORDS + DOODLES */
+
+const softDoodlesContainer =
+  document.getElementById("softDoodles");
+
 
 const doodleWords = [
+
   "us",
   "blue",
   "pink",
@@ -2276,9 +4645,12 @@ const doodleWords = [
   "manifesting",
   "twinn",
   "we got this"
+
 ];
 
+
 const doodleIcons = [
+
   "♡",
   "✦",
   "✧",
@@ -2288,52 +4660,143 @@ const doodleIcons = [
   "♪",
   "🩵",
   "🩷"
+
 ];
 
-function createSoftDoodles() {
-  if (!softDoodlesContainer) return;
+
+function createSoftDoodles(){
+
+  if(!softDoodlesContainer)
+    return;
+
 
   softDoodlesContainer.innerHTML = "";
 
-  const isMobile = window.innerWidth <= 650;
-  const totalDoodles = isMobile ? 18 : 34;
 
-  for (let i = 0; i < totalDoodles; i++) {
-    const doodle = document.createElement("div");
+  const isMobile =
+    window.innerWidth <= 650;
 
-    const useWord = Math.random() > 0.45;
-    doodle.className = useWord ? "soft-doodle word" : "soft-doodle icon";
 
-    doodle.textContent = useWord
-      ? doodleWords[Math.floor(Math.random() * doodleWords.length)]
-      : doodleIcons[Math.floor(Math.random() * doodleIcons.length)];
+  const totalDoodles =
+    isMobile
+    ? 18
+    : 34;
 
-    const left = Math.random() * 100;
-    const top = Math.random() * 100;
-    const rotate = Math.random() * 34 - 17;
-    const duration = Math.random() * 5 + 5;
-    const opacity = useWord
+
+  for(
+    let i = 0;
+    i < totalDoodles;
+    i++
+  ){
+
+    const doodle =
+      document.createElement("div");
+
+
+    const useWord =
+      Math.random() > 0.45;
+
+
+    doodle.className =
+      useWord
+      ? "soft-doodle word"
+      : "soft-doodle icon";
+
+
+    doodle.textContent =
+      useWord
+
+      ? doodleWords[
+          Math.floor(
+            Math.random() *
+            doodleWords.length
+          )
+        ]
+
+      : doodleIcons[
+          Math.floor(
+            Math.random() *
+            doodleIcons.length
+          )
+        ];
+
+
+    const left =
+      Math.random() * 100;
+
+    const top =
+      Math.random() * 100;
+
+    const rotate =
+      Math.random() * 34 - 17;
+
+    const duration =
+      Math.random() * 5 + 5;
+
+
+    const opacity =
+      useWord
       ? Math.random() * 0.16 + 0.12
       : Math.random() * 0.22 + 0.16;
 
-    const fontSize = useWord
-      ? Math.floor(Math.random() * 5) + 11
-      : Math.floor(Math.random() * 12) + 16;
 
-    doodle.style.left = `${left}%`;
-    doodle.style.top = `${top}%`;
-    doodle.style.setProperty("--rotate", `${rotate}deg`);
-    doodle.style.setProperty("--duration", `${duration}s`);
-    doodle.style.setProperty("--opacity", opacity);
-    doodle.style.setProperty("--font-size", `${fontSize}px`);
-    doodle.style.animationDelay = `${Math.random() * 4}s`;
+    const fontSize =
+      useWord
+      ? Math.floor(
+          Math.random() * 5
+        ) + 11
 
-    softDoodlesContainer.appendChild(doodle);
+      : Math.floor(
+          Math.random() * 12
+        ) + 16;
+
+
+    doodle.style.left =
+      `${left}%`;
+
+    doodle.style.top =
+      `${top}%`;
+
+    doodle.style.setProperty(
+      "--rotate",
+      `${rotate}deg`
+    );
+
+    doodle.style.setProperty(
+      "--duration",
+      `${duration}s`
+    );
+
+    doodle.style.setProperty(
+      "--opacity",
+      opacity
+    );
+
+    doodle.style.setProperty(
+      "--font-size",
+      `${fontSize}px`
+    );
+
+    doodle.style.animationDelay =
+      `${Math.random() * 4}s`;
+
+
+    softDoodlesContainer
+      .appendChild(doodle);
+
   }
+
 }
 
+
 createSoftDoodles();
-window.addEventListener("resize", createSoftDoodles);
+
+window.addEventListener(
+  "resize",
+  createSoftDoodles
+);
+
+
 /* RANDOM LITTLE THING SECTION */
 
 /*
@@ -2346,41 +4809,48 @@ window.addEventListener("resize", createSoftDoodles);
 */
 
 const randomThing = {
-  type: "wednesday_letters",
 
-  title: "Wednesday Update",
+  type:"wednesday_letters",
 
-  subtitle: "Neend aa rahi hai yaaar",
+  title:"Wednesday Update",
 
-  newLetter: `
+  subtitle:"Neend aa rahi hai yaaar",
+
+  newLetter:`
+
 Meow,
-So listen I know the tension is here. But it's not necessary for us to keep carrying tension. I know you made some mistakes and you are sorry about it. This realisation matters. Also it's not only you who have made mistakes, I was wrong at some parts too. You won't agree I know but listen, We are human beings, we are designed to make mistakes and learn from those mistakes. We are not meant to keep carrying any type of emotional weight forever. Who doesn't make mistakes? Everyone is wrong for doing something somehow. Literally everyone. I know you have that realisation in you. So just let it go. Whatever happened between us. Just Happened. Don't keep carrying the weight that 
-"Oh no I made him feel loved 
+So listen I know the tension is here. But it's not necessary for us to keep carrying tension. I know you made some mistakes and you are sorry about it. This realisation matters. Also it's not only you who have made mistakes, I was wrong at some parts too. You won't agree I know but listen, We are human beings, we are designed to make mistakes and learn from those mistakes. We are not meant to keep carrying any type of emotional weight forever. Who doesn't make mistakes? Everyone is wrong for doing something somehow. Literally everyone. I know you have that realisation in you. So just let it go. Whatever happened between us. Just Happened. Don't keep carrying the weight that
+"Oh no I made him feel loved
 then pulled away when he was all in."
 I know it was your first time feeling something like this and you couldn't handle it correct but it's ALL RIGHT❤‍🩹
 I believe in this cause this was my first time someone ACTUALLY LOVING ME AND NOT JUST PRETENDING. I know this can get emotionally heavy, ALOTTTTT HEAVYYY and can get out of our control and sometimes reaches a point where we just can't endure it anymore.
-I know my love for you was and is genuine, I know your love for me was and is real. There is not doubt in these statements. So if it's meant to, then it will find it's way back to US through each other either Sooner or Later 🩵🩷 (I know I said not to use "IFs".  It's here to make the sentence lighter in weight) so don't worry. I know we did best that we could've done emotionally. It's not our fault that it's in this state now. Not your fault and neither mine🫂
+I know my love for you was and is genuine, I know your love for me was and is real. There is not doubt in these statements. So if it's meant to, then it will find it's way back to US through each other either Sooner or Later 🩵🩷 (I know I said not to use "IFs". It's here to make the sentence lighter in weight) so don't worry. I know we did best that we could've done emotionally. It's not our fault that it's in this state now. Not your fault and neither mine🫂
 Whatever happened in the past happened for our own good, whatever is happening right now is happening for our own good and whatever that will happen in future WILL BE GOOD for both of Us. We cannot predict anything but can hope that whatever happens to us will be good for both of us in some way🤍❤‍🩹
 And also bhai I wannna say ki FVK EVERYTHING, EVERY NEGATIVE FEELING, EVERY GUILT, EVERY EMOTION PRESENT. WHENEVER YOU ARE DOWN AND NEED MY PRESENCE IN FUTURE. I'M HERE FOR YOU. NO MATTER THE CONDITIONS OR SITUATIONS WE ARE IN. WHETHER WE ARE I'M CONSTANT CONTACT OR NOT. YOU ARE MY TWINNNN FOREVER!!!!!❤‍🩹🫂
-The whole point is about making sure that you don't keep carrying it and regretting forever. 
+The whole point is about making sure that you don't keep carrying it and regretting forever.
 AND PATA HAI KAL KYA HUAAA!!!! YOU SAID KI "Sorry I messed this up." MUJHE LAGA YOU WERE TALKING ABOUT OUR SITUATION AND I RESPONDED ACCORDINGLY😭
 And also sorry I was acting dry and weird yesterday but Imma be honest mujhe thoda sa gussa tha and I don't want to hide it but it's gone now. I can't stay mad at you for so long😝 But woh conversation maine jaan boojh ke end nahin ki thi😭✋ I literally had to go work out cuz I was not getting enough time to workout since last week cuz of some reason and not cuz of you😭✋
 Bas itna hi tha, Remember whatever that will happen in future will be good for both of Us❤‍🩹 and also there is no need to supress any emotion if you have been doing it, whether its good or bad🫂
 Mmwwwwwah!!!!😝
+
   `,
 
-  oldLetter: `
+  oldLetter:`
+
 Komal I want to talk about that "courage to end it all" thing. Listen I don't know what exactly is the situation there but I know it's hard I know it's super hard but listen self harm is not a solution to anything You also said by yourself that you are not going to do it no matter how hard it gets. This is great, I know you'll stick to your statement but just in case things get too rough and the thoughts start surrounding your brain again. Just know you don't have to handle it alone. I know you have a tough family to survive with but again self harm is not an option. You have me, no matter if we are on good terms or bad terms which we are never on but even if we get in future and stop talking. You can still reach me out let everything flow out of your brain without worrying about what my reaction would be and also currently, you are supposed to tell me any bad thought which is scratching your brain from the inside. I know you get worried that if I tell him then he'll get affected mentally but look, it's not about me, it's not about us, it's totally about you. When you are having thoughts like that it's totally about You and your safety and containment of your thoughts at the moment. I know I'm not a therapist and neither some emergency helpline and I know I can't magically fix anything but I guess I know you that much that I will hear you, make you feel seen and I'll try to get you out of the thoughts if not permanently then at least for the moment. You just have to tell me, my reaction would always be warmer than how most people treat you.
-Important- Having bad thoughts and intense negative emotions doesn't make you a burden. I know you may think like he's going to carry alot with him if I tell him. But just know when it's about this topic I'm not thinking about "what about me?" Or anything like this. You don't have to prevent telling me things just because you are scared of my reactions. My whole personality is based on listening to the things people want to share and things I want to share. I am not taking this as a responsibility of saving someone's life, I know this is a huge weight to carry alone. I know you can do this far better than how I would tell you to but just know I'm not here just for saying and listening mwahh mwahhh and loveYou😭 but also to handle your emotional turns♥️. I don't care if I need to handle them daily. When I fell for you and we talked about  confession and stuff, I didn't just get happy and decided to roll with whatever happens. Trust me I thought about everything literally everything. I knew that there are going to be times where I'll need to contain your emotions. I knew there is going to be negativity and as you said that this is going to be there almost daily. Just know even if you need talk about something daily and even need to repeat the conversation. I'm here. No matter how we end, no matter if hope is here, no matter what. Even if you were a stranger to me I would've treated this section of your thoughts the same. Don't worry if it would affect me or not because while you are in that zone.
-It's not about me, not about us and it's only about you and your safety. 
+Important- Having bad thoughts and intense negative emotions doesn't make you a burden. I know you may think like he's going to carry alot with him if I tell him. But just know when it's about this topic I'm not thinking about "what about me?" Or anything like this. You don't have to prevent telling me things just because you are scared of my reactions. My whole personality is based on listening to the things people want to share and things I want to share. I am not taking this as a responsibility of saving someone's life, I know this is a huge weight to carry alone. I know you can do this far better than how I would tell you to but just know I'm not here just for saying and listening mwahh mwahhh and loveYou😭 but also to handle your emotional turns♥️. I don't care if I need to handle them daily. When I fell for you and we talked about confession and stuff, I didn't just get happy and decided to roll with whatever happens. Trust me I thought about everything literally everything. I knew that there are going to be times where I'll need to contain your emotions. I knew there is going to be negativity and as you said that this is going to be there almost daily. Just know even if you need talk about something daily and even need to repeat the conversation. I'm here. No matter how we end, no matter if hope is here, no matter what. Even if you were a stranger to me I would've treated this section of your thoughts the same. Don't worry if it would affect me or not because while you are in that zone.
+It's not about me, not about us and it's only about you and your safety.
 Baaki toh I trust you when you said that you are not going to do this and keep going further. Yes, this is my real Twin this is my Perpyyy, Byeeeee.
 Mwahhh♥️
+
   `,
-topImages: [
-  "images/roblox1.jpg",
-  "images/roblox2.jpg"
-],
-  images: [
+
+  topImages:[
+    "images/roblox1.jpg",
+    "images/roblox2.jpg"
+  ],
+
+  images:[
     "images/memory1.jpg",
     "images/memory2.jpg",
     "images/memory3.jpg",
@@ -2389,179 +4859,445 @@ topImages: [
     "images/memory6.jpg",
     "images/memory7.jpg"
   ]
+
 };
 
-function loadRandomThing() {
-  const title = document.getElementById("randomThingTitle");
-  const subtitle = document.getElementById("randomThingSubtitle");
-  const content = document.getElementById("randomThingContent");
 
-  if (!title || !subtitle || !content) return;
+function loadRandomThing(){
 
-  title.textContent = randomThing.title || "Wednesday Update";
-  subtitle.textContent = randomThing.subtitle || "tap the gift. no questions.";
+  const title =
+    document.getElementById(
+      "randomThingTitle"
+    );
+
+  const subtitle =
+    document.getElementById(
+      "randomThingSubtitle"
+    );
+
+  const content =
+    document.getElementById(
+      "randomThingContent"
+    );
+
+
+  if(
+    !title ||
+    !subtitle ||
+    !content
+  )
+    return;
+
+
+  title.textContent =
+    randomThing.title ||
+    "Wednesday Update";
+
+
+  subtitle.textContent =
+    randomThing.subtitle ||
+    "tap the gift. no questions.";
+
 
   content.innerHTML = "";
 
-  if (randomThing.type === "image" && randomThing.image) {
+
+  if(
+    randomThing.type === "image" &&
+    randomThing.image
+  ){
+
     content.innerHTML = `
-    <!-- NEW TOP IMAGES -->
 
       <div class="random-thing-media">
-        <img src="${randomThing.image}" alt="random memory">
+
+        <img
+          src="${randomThing.image}"
+          alt="random memory"
+        >
+
       </div>
-      <div class="random-thing-text">${randomThing.text || ""}</div>
+
+      <div class="random-thing-text">
+        ${randomThing.text || ""}
+      </div>
+
     `;
+
     return;
+
   }
 
-  if (randomThing.type === "video" && randomThing.video) {
+
+  if(
+    randomThing.type === "video" &&
+    randomThing.video
+  ){
+
     content.innerHTML = `
+
       <div class="random-thing-media">
-        <video src="${randomThing.video}" controls playsinline></video>
+
+        <video
+          src="${randomThing.video}"
+          controls
+          playsinline
+        ></video>
+
       </div>
-      <div class="random-thing-text">${randomThing.text || ""}</div>
+
+      <div class="random-thing-text">
+        ${randomThing.text || ""}
+      </div>
+
     `;
+
     return;
+
   }
 
-  if (randomThing.type === "text") {
+
+  if(
+    randomThing.type === "text"
+  ){
+
     content.innerHTML = `
-      <div class="random-thing-text">${randomThing.text || "nothing here yet 😭"}</div>
+
+      <div class="random-thing-text">
+        ${randomThing.text || "nothing here yet 😭"}
+      </div>
+
     `;
+
     return;
+
   }
-  if (randomThing.type === "text") {
+
+
+  if(
+    randomThing.type === "wednesday_letters"
+  ){
+
+    content.innerHTML = `
+
+      <div class="memory-sequence">
+
+        
+
+        <img
+          src="images/roblox3.jpg"
+          class="memory-photo"
+        >
+
+        <img
+          src="images/roblox1.jpg"
+          class="memory-photo"
+        >
+
+        <img
+          src="images/roblox2.jpg"
+          class="memory-photo"
+        >
+
+        <div
+          class="center"
+          style="margin:28px 0;"
+        >
+
+          <span class="eyebrow">
+            Then you said "Absolute sub activitiess" lmaeowwww ,forgot to capture that in the screenshot😭😭
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="random-thing-text">
+        ${randomThing.newLetter}
+      </div>
+
+
+      <div
+        class="random-thing-text"
+        style="
+          font-weight:1000;
+          text-align:center;
+          margin:18px 0;
+        "
+      >
+
+        And also here is the letter from that night.
+        Read this whenever you are feeling downn🩵
+
+      </div>
+
+
+      <div class="random-thing-text">
+        ${randomThing.oldLetter}
+      </div>
+
+
+      <div class="memory-sequence">
+
+        ${randomThing.images.map(img => `
+
+          <img
+            src="${img}"
+            class="memory-photo"
+          >
+
+        `).join("")}
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
   content.innerHTML = `
-    <div class="random-thing-text">${randomThing.text || "nothing here yet 😭"}</div>
-  `;
-  return;
-}
 
-if (randomThing.type === "wednesday_letters") {
-
-  content.innerHTML = `
-
-      <!-- NEW TOP IMAGES -->
-    <div class="memory-sequence">
-      <img src="images/minecraft-memory.jpg" class="memory-photo">
-      <img src="images/roblox3.jpg" class="memory-photo">
-      <img src="images/roblox1.jpg" class="memory-photo">
-      <img src="images/roblox2.jpg" class="memory-photo">
-      <div class="center" style="margin: 28px 0;">
-  <span class="eyebrow">
-    Then you said "Absolute sub activitiess" lmaeowwww ,forgot to capture that in the screenshot😭😭    
-  </span>
-</div>
-    </div>
-
-    <!-- NEW LETTER FIRST -->
-    <div class="random-thing-text">
-      ${randomThing.newLetter}
-    </div>
-
-    <!-- HEADING BEFORE OLD LETTER -->
-    <div class="random-thing-text" style="
-      font-weight:1000;
-      text-align:center;
-      margin:18px 0;
-    ">
-      And also here is the letter from that night. 
-      Read this whenever you are feeling downn🩵
-    </div>
-
-    <!-- OLD LETTER -->
-    <div class="random-thing-text">
-      ${randomThing.oldLetter}
-    </div>
-
-    <!-- IMAGES LAST -->
-    <div class="memory-sequence">
-      ${randomThing.images.map(img => `
-        <img src="${img}" class="memory-photo">
-      `).join("")}
-    </div>
-
-  `;
-
-  return;
-}
-
-  content.innerHTML = `
     <div class="random-thing-empty">
       nothing here yet, but knowing me i’ll add something soon 😭
     </div>
+
   `;
+
 }
+/* MINECRAFT MEMORY GIFT */
 
-function openRandomGift() {
-  const box = document.getElementById("randomThingBox");
-  const reveal = document.getElementById("randomGiftReveal");
+function openMinecraftGift() {
 
-  if (!box || !reveal) return;
+  const gift = document.getElementById("minecraftGiftBox");
+  const memories = document.getElementById("minecraftMemoryReveal");
 
-  if (box.classList.contains("opened")) return;
+  if (!gift || !memories) return;
 
-  box.classList.add("opened");
-  // 🔔 TELEGRAM ALERT
-  fetch("/.netlify/functions/telegram-open", {
-    method: "POST"
-  }).catch(() => {});
+  if (gift.classList.contains("opened")) return;
 
+  // Use the EXACT same opening class as Wednesday
+  gift.classList.add("opened");
 
   setTimeout(() => {
-    reveal.classList.add("show");
-  }, 420);
+
+    memories.classList.add("show");
+
+    setTimeout(() => {
+      memories.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 100);
+
+  }, 500);
 }
+function openRandomGift(){
+
+  const box =
+    document.getElementById(
+      "randomThingBox"
+    );
+
+  const reveal =
+    document.getElementById(
+      "randomGiftReveal"
+    );
+
+
+  if(
+    !box ||
+    !reveal
+  )
+    return;
+
+
+  if(
+    box.classList.contains("opened")
+  )
+    return;
+
+
+  box.classList.add("opened");
+
+
+  /* TELEGRAM ALERT */
+
+  fetch(
+    "/.netlify/functions/telegram-open",
+    {
+      method:"POST"
+    }
+  ).catch(() => {});
+
+
+  setTimeout(
+    () => {
+
+      reveal.classList.add("show");
+
+    },
+    420
+  );
+
+}
+
 
 loadRandomThing();
 
-    /* PARTICLES */
-    const canvas = document.getElementById("bg");
-    const ctx = canvas.getContext("2d");
 
-    function resizeCanvas() {
-      canvas.width = innerWidth;
-      canvas.height = innerHeight;
-    }
+/* PARTICLES */
 
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+const canvas =
+  document.getElementById("bg");
 
-    const particles = [];
+const ctx =
+  canvas.getContext("2d");
 
-    for (let i = 0; i < 70; i++) {
-      particles.push({
-        x: Math.random() * innerWidth,
-        y: Math.random() * innerHeight,
-        r: Math.random() * 2.7 + 1,
-        dx: (Math.random() - 0.5) * 0.45,
-        dy: (Math.random() - 0.5) * 0.45,
-        c: Math.random() > 0.5 ? "rgba(91,174,255,.42)" : "rgba(255,115,183,.42)"
-      });
-    }
 
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+function resizeCanvas(){
 
-      particles.forEach(p => {
-        p.x += p.dx;
-        p.y += p.dy;
+  canvas.width =
+    innerWidth;
 
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  canvas.height =
+    innerHeight;
 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.c;
-        ctx.fill();
-      });
+}
 
-      requestAnimationFrame(animateParticles);
-    }
 
-    animateParticles();
-  </script>
+resizeCanvas();
+
+
+window.addEventListener(
+  "resize",
+  resizeCanvas
+);
+
+
+const particles = [];
+
+
+for(
+  let i = 0;
+  i < 70;
+  i++
+){
+
+  particles.push({
+
+    x:
+      Math.random() *
+      innerWidth,
+
+    y:
+      Math.random() *
+      innerHeight,
+
+    r:
+      Math.random() *
+      2.7 + 1,
+
+    dx:
+      (Math.random() - 0.5) *
+      0.45,
+
+    dy:
+      (Math.random() - 0.5) *
+      0.45,
+
+    c:
+      Math.random() > 0.5
+      ? "rgba(91,174,255,.42)"
+      : "rgba(255,115,183,.42)"
+
+  });
+
+}
+
+/* ============================= */
+/* MINECRAFT MEMORY GIFT */
+/* ============================= */
+
+function openMinecraftGift() {
+
+  const gift = document.getElementById("minecraftGiftBox");
+  const memories = document.getElementById("minecraftMemoryReveal");
+
+  if (!gift || !memories) return;
+
+  if (gift.classList.contains("opened")) return;
+
+  gift.classList.add("opened");
+
+  setTimeout(() => {
+
+    memories.classList.add("show");
+
+  }, 500);
+}
+
+
+function animateParticles(){
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  particles.forEach(p => {
+
+    p.x += p.dx;
+    p.y += p.dy;
+
+
+    if(
+      p.x < 0 ||
+      p.x > canvas.width
+    )
+      p.dx *= -1;
+
+
+    if(
+      p.y < 0 ||
+      p.y > canvas.height
+    )
+      p.dy *= -1;
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+      p.x,
+      p.y,
+      p.r,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fillStyle =
+      p.c;
+
+    ctx.fill();
+
+  });
+
+
+  requestAnimationFrame(
+    animateParticles
+  );
+
+}
+
+
+animateParticles();
+
+</script>
 
 </body>
 </html>
